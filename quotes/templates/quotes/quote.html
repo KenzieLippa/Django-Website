@@ -1,0 +1,16 @@
+{% extends 'quotes/base.html' %}
+
+{% block title %} Quotes {% endblock %}
+
+{% block content %}
+    <h2 class="page-title">Ben Shapiro Quotes</h2>
+    <ul>
+        <li>
+            {%load static %}
+            <img src="{%static image %}" alt="Random image">
+            <p>
+                {{quote}}
+            </p>
+        </li>
+    </ul>
+{% endblock %}

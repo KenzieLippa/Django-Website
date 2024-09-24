@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Shapiro Quotes</title>
+        {%load static%}
+        <link rel="stylesheet" href="{% static "styles.css" %}">
+        <!-- fill in link later -->
+    </head>
+    <body>
+        <header>
+        {% comment %} <h1 class="page-title">Ben's Famous Quotes!</h1> {% endcomment %}
+        <nav>
+            <div class = "cont">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/quote">Quotes</a></li>
+                <li><a href="/show_all">Show All</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+        </nav>
+    </header>
+    <div class = "content">
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+    <!-- put a footer in? -->
+    </body>
+</html>
