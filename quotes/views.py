@@ -6,6 +6,8 @@ import random
 # def home_page_view(request):
 #     return HttpResponse("Hello WOrld!")
 # global views
+
+'''store the quotes and images in the arrays, use a multiline string so grammer can be used as well'''
 quotes = [
     '''"Society is now separated between lions and scavengers.
 The lions are people who wish to provide, who wish to produce. They are people 
@@ -58,3 +60,8 @@ def about_view(req):
         'image': "ben-face.png"
     }
     return render(req, "quotes/about.html", context)
+
+
+'''I had to move my app into a new project file because I forgot to make sure heroku worked before then. I basically did all the work
+and thought heroku wld be simple to upload (like the cs server) which it was not. this resulted in me having to mess with a test project until I 
+could correctly upload everything.'''
