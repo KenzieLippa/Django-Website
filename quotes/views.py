@@ -27,6 +27,9 @@ images = [
 
 
 def quote_view(req):
+    '''This function selects a random quote and then returns a render 
+    then places this into the context which is then returned in the render call so that the page that is called
+    can use it as a variable'''
     selected_quote = random.choice(quotes)
     selected_image = random.choice(images)
     print(selected_image)
@@ -39,6 +42,9 @@ def quote_view(req):
 # Create your views here.
 
 def show_all_view(req):
+    '''here we zip the combined data because it will allow us to loop through both 
+    on our webpage instead of just one at a time. This results in one for loop instead of two
+    we then returned the combined data as an argument like before'''
     combined_data = zip(quotes, images)
     context = {
         'combined_data':combined_data
@@ -46,6 +52,8 @@ def show_all_view(req):
     return render(req, "quotes/show_all.html", context)
 
 def about_view(req):
+    '''here we have a new image that will allow us to see ben in all his glory
+    like before we pass the image in through the context and then will use it as a variable on the front end'''
     context = {
         'image': "ben-face.png"
     }
