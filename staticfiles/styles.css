@@ -65,7 +65,13 @@ ul{
 }
 img{
     max-width: 660px;
+    height:auto;
+    max-height: 660px;
     box-shadow: 5px 5px 5px 5px grey;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
     /* margin-left: 20%; */
 }
 p{

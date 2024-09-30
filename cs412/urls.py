@@ -21,5 +21,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("quotes.urls"))
+    path("quotes/", include("quotes.urls")),
+    path("formdata/", include("formdata.urls")),
+    path("restaurant/", include("restaurant.urls")),
 ] + static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# any url that starts with form data will be handled by that url
+# have to have templates followed by the form name

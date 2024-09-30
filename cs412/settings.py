@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'quotes',
+    'formdata',
+    'restaurant',
+    # can hide by commenting out in this list
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    # A BUM STEER! THIS BROKE MY APP SO MANY TIMES
 ]
 
 ROOT_URLCONF = 'cs412.urls'

@@ -1,23 +1,26 @@
+{%load static%}
 <html>
     <head>
-        <title>Shapiro Quotes</title>
-        {%load static%}
+        <title>Form Data</title>
+      
         <link rel="stylesheet" href="{% static "styles.css" %}">
         <!-- fill in link later -->
     </head>
     <body>
         <header>
         {% comment %} <h1 class="page-title">Ben's Famous Quotes!</h1> {% endcomment %}
-        <nav>
+        <!-- url nickname is demoed for the home link -->
+        <!-- <nav>
+            
             <div class = "cont">
             <ul class="nav-links">
-                <li><a href="{%url 'home'%}">Home</a></li>
-                <li><a href="{%url 'quotes'%}">Quotes</a></li>
-                <li><a href="{%url 'show_all'%}">Show All</a></li>
-                <li><a href="{%url 'about'%}">About</a></li>
+                <li><a href="{% url 'show_form'%}">Home</a></li> 
+                <li><a href="/quote">Quotes</a></li>
+                <li><a href="/show_all">Show All</a></li>
+                <li><a href="/about">About</a></li>
             </ul>
         </div>
-        </nav>
+        </nav> -->
     </header>
     <div class = "content">
         {% block content %}
