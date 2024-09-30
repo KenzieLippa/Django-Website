@@ -37,6 +37,9 @@ ul{
     justify-content: space-between;
     align-items: center;
 }
+.content .fix{
+    margin-left: 40%;
+}
 .nav-links{
     display: flex;
     justify-content: space-evenly;
@@ -55,7 +58,13 @@ ul{
     background-color: rgb(177, 110, 177);
     border-radius: 5px;
 }
+.page-title-j{
+    font-size: 50px;
+    align-items: center;
+    margin-left: 30%;
+    margin-top: 50px;
 
+}
 .page-title{
     font-size: 50px;
     align-items: center;
@@ -63,15 +72,10 @@ ul{
     margin-top: 50px;
 
 }
+
 img{
     max-width: 660px;
-    height:auto;
-    max-height: 660px;
     box-shadow: 5px 5px 5px 5px grey;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
     /* margin-left: 20%; */
 }
 p{
