@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import random
 import time
+from datetime import datetime, timedelta
 # Create your views here.
 
 Menu_Items = [
@@ -34,8 +35,8 @@ def order(req):
 def confirmation(req):
     '''process the order and continue'''
     template_name = "restaurant/confirmation.html"
-    ready_time = time.localtime()
-    formatted_ready = time.strftime("%H:%M", ready_time)
+    # ready_time = time.localtime()
+    
     if req.POST:
         # get selected items from the form
         order_items = req.POST.getlist('items')
@@ -57,8 +58,8 @@ def confirmation(req):
 
 
         # calculate the ready time
-        # ready_time = time.localtime(time.time() + random.randint(1800, 3600))
-
+        ready_time = datetime.now() + timedelta(minutes=random.randint(30, 60))
+        formatted_ready = ready_time.strftime("%H:%M")
 
         context = {
             'customer_name': customer_name,
