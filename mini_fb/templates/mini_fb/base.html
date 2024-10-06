@@ -1,0 +1,22 @@
+{%load static%}
+<html>
+    <head>
+        <title>Restaurant App</title>
+        <link rel="stylesheet" href="{% static "styles3.css" %}">
+    </head>
+    <body>
+        <nav class="joes-nav">
+            <div class = "cont">
+            <ul class="nav-links">
+                <li><a href="{%url 'show_all'%}">Home</a></li>
+                <li><a href="{%url 'show_all'%}">Coming Soon!</a></li>
+                <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
+                <li><a href="{%url 'about'%}">About</a></li> -->
+            </ul>
+        </div>
+        </nav>
+        {%block content%}
+        {%endblock%}
+
+    </body>
+</html>
