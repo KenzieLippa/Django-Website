@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'quotes',
     'formdata',
     'restaurant',
+    'blog',
+    'mini_fb',
+    
     # can hide by commenting out in this list
 ]
 
