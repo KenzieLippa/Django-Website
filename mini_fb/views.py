@@ -17,13 +17,13 @@ class ShowAllView(ListView):
 class ShowProfile(DetailView):
     '''show the profile that was clicked on'''
     model = Profile
-    template_name = 'mini_fb/profile.html'
+    template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
 
 class Create_Profile_View(CreateView):
     '''a view to create a new profile and save to the database'''
     form_class = CreateProfileForm
-    template_name = 'mini_fb/create_profile.html'
+    template_name = 'mini_fb/create_profile_form.html'
 
     def get_success_url(self) -> str:
         '''redirect the url after successfully submitting form'''
@@ -38,7 +38,7 @@ class Create_Profile_View(CreateView):
 class Create_Status_View(CreateView):
     '''a view to create a new status and save it to the database'''
     form_class = CreateStatusMsg
-    template_name = "mini_fb/create_status.html"
+    template_name = "mini_fb/create_status_form.html"
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''build the dict of context data for this view'''
         context = super().get_context_data(**kwargs)
@@ -52,6 +52,7 @@ class Create_Status_View(CreateView):
         #add profile to context data
         context['profile'] = profile
         return context
+    
     def form_valid(self, form):
         '''handle the form submission and set a foreign key by attaching the profile to the status, can find the profile pk in url'''
         profile = Profile.objects.get(pk=self.kwargs['pk'])
