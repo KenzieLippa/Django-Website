@@ -1,0 +1,40 @@
+{% extends 'mini_fb/base.html' %}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{%static 'styles4.css'%}">
+{%if profile.profile_img %}
+
+<div class="cont2">
+
+    
+   <div class="image-section">
+
+       
+       <img src="{{profile.profile_img}}" alt="" class="img-title">
+    </div>
+    
+    
+    
+    
+    <div class="text-section">
+        <h2 class="page-title">{{profile.first_name}} {{profile.last_name}}</h2>
+        <h3 class="city">
+            {{profile.city}}
+        </h3>
+    </div>
+</div>
+<h2 class="stat-title">Status Messages:</h2>
+<!-- {{profile.get_stat_msg}} -->
+{%for p in profile.get_stat_msg%}
+<div class="stat-msg">
+    <!-- <div class="stat-msg-text"> -->
+       <strong>{{p.timeStamp}}</strong> 
+       <p>
+        {{p.text}}
+       </p>
+    <!-- </div> -->
+</div>
+    {%endfor%}
+
+{%endif%}
+{%endblock%}

@@ -1,0 +1,41 @@
+img{
+    margin-top: 100px;
+    float: left;
+    margin-left: 20px;
+    width: 600px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.cont2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.img-section{
+    flex: 1;
+    text-align: center;
+}
+
+.profile-img{
+    width: 80%;
+    height: auto;
+    max-width: 300px;
+    border-radius: 50%;
+}
+
+.text-section{
+    flex: 2;
+    padding: 40px;
+}
+.stat-msg{
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 5px grey;
+    margin: 20px;
+}
+.stat-title{
+    margin: 20px;
+}

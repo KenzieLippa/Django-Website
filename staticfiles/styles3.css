@@ -57,11 +57,14 @@ ul{
     margin-top: 50px;
 
 }
+.img-title{
+    margin-top: 50px;
+}
 img{
     max-width: 660px;
     height:auto;
-    max-height: 660px;
-    box-shadow: 5px 5px 5px 5px grey;
+    /* max-height: 660px; */
+    box-shadow: 5px 5px 5px 5px pruple;
 
     display: flex;
     margin: 0 auto;
