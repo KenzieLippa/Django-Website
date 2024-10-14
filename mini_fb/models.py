@@ -6,7 +6,7 @@ class Profile(models.Model):
     first_name = models.TextField(blank=False)
     last_name = models.TextField(blank=False)
     city = models.TextField(blank=False)
-    email_address = models.TextField(blank=False)
+    email_address = models.EmailField(blank=False)
     # for profile url
     profile_img = models.URLField(blank=False)
 
@@ -20,6 +20,7 @@ class Profile(models.Model):
         status = StatusMsg.objects.filter(profile = self)
         return status
         
+    
 
 class StatusMsg(models.Model):
     '''allow users to include a status message'''
