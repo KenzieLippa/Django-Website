@@ -1,13 +1,20 @@
 {%extends 'mini_fb/base.html'%}
 {%load static%}
 {%block content%}
+{%csrf_token%}
 <link rel="stylesheet" href="{% static 'styles4.css'%}">
 <div class="add-prof">
 <h2>Create a New Profile</h2>
 <form method="post">
     {{form.as_p}}
+    <div class="cancel">
 <input type="submit" name= 'add a profile' value="Add a Profile">
-{%csrf_token%}
+
+
 </form>
+<form action="{%url 'show_all'%}">
+    <input type="submit" name= 'cancel' value= "Cancel" class="cancel-color">
+    </form>
+</div>
 </div>
 {%endblock%}
