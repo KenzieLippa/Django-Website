@@ -4,7 +4,8 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 
-from .forms import CreateProfileForm
+from .forms import CreateProfileForm, CreateStatusMsg
+from typing import Any
 
 class ShowAllView(ListView):
     '''create a view to show all the portraits'''
@@ -33,4 +34,31 @@ class Create_Profile_View(CreateView):
         # profile = Profile.objects.get(pk=self.kwargs['pk'])
         # form.instance.profile = profile
         return super().form_valid(form)
+    
+class Create_Status_View(CreateView):
+    '''a view to create a new status and save it to the database'''
+    form_class = CreateStatusMsg
+    template_name = "mini_fb/create_status.html"
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        '''build the dict of context data for this view'''
+        context = super().get_context_data(**kwargs)
+
+        #find pk from url
+        pk = self.kwargs['pk']
+
+        # find corresponding profile
+        profile = Profile.objects.get(pk=pk)
+
+        #add profile to context data
+        context['profile'] = profile
+        return context
+    def form_valid(self, form):
+        '''handle the form submission and set a foreign key by attaching the profile to the status, can find the profile pk in url'''
+        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        form.instance.profile = profile
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        '''return a url to redirect to after successfully submitting form'''
+        return reverse('profile', kwargs={'pk': self.kwargs['pk']})
     

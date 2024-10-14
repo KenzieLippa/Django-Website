@@ -7,3 +7,10 @@ class CreateProfileForm(forms.ModelForm):
         '''associate this with the profile form'''
         model = Profile
         fields = ['first_name', 'last_name', 'city', 'email_address', "profile_img"]
+
+class CreateStatusMsg(forms.ModelForm):
+    class Meta:
+        model = StatusMsg
+        fields = ['text']
+
+    

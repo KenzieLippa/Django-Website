@@ -24,6 +24,8 @@
     </div>
 </div>
 <h2 class="stat-title">Status Messages:</h2>
+
+<h3 class = "stat-title"> <a href="{%url 'create_status' profile.pk%}">Add a status</a></h2>
 <!-- {{profile.get_stat_msg}} -->
 {%for p in profile.get_stat_msg%}
 <div class="stat-msg">
