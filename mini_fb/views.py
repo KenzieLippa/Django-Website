@@ -92,7 +92,7 @@ class UpdateStatusMessageView(UpdateView):
     '''update the status message the same way as before
     might also have to add something for the images here'''
     form_class = UpdateStatusMessageForm
-    template_name = "mini_fb/update_status_message_form.html"
+    template_name = "mini_fb/update_status_form.html"
     model = StatusMsg
     context_object_name = "status_msg"
 
@@ -114,7 +114,7 @@ class UpdateStatusMessageView(UpdateView):
 
 class DeleteStatusMessageView(DeleteView):
     '''a view to delete our status messages'''
-    template_name = "mini_fb/delete_status_message_form.html"
+    template_name = "mini_fb/delete_status_form.html"
     model = StatusMsg
     context_object_name = 'status_msg'
 
