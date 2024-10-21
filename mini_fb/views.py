@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Profile
+from .models import *
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse
@@ -57,6 +57,19 @@ class Create_Status_View(CreateView):
         '''handle the form submission and set a foreign key by attaching the profile to the status, can find the profile pk in url'''
         profile = Profile.objects.get(pk=self.kwargs['pk'])
         form.instance.profile = profile
+        #save the status msg to the db
+        sm = form.save()
+
+        #read the file from the form
+        files = self.request.FILES.getlist('files')
+        for img in files:
+            #create image object
+            new_img = Image()
+            new_img.image = img
+            # hopefully this works lol
+            new_img.status_msg = sm
+            new_img.save()
+
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
