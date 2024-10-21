@@ -26,6 +26,8 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")),
     path("blog/", include("blog.urls")),
     path("mini_fb/", include("mini_fb.urls")),
-] + static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
+urlpatterns += static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # any url that starts with form data will be handled by that url
 # have to have templates followed by the form name

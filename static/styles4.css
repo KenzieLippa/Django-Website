@@ -35,6 +35,12 @@ img{
     border-radius: 5px;
     box-shadow: 5px 5px 5px 5px grey;
     margin: 20px;
+    /* width: 100%; */
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    /* max-width: 300px; */
 }
 .stat-title{
     margin: 20px;
@@ -109,3 +115,13 @@ input[type="submit"]:hover{
 /* .cancel-color{
     background: linear-gradient(135deg, rgb(255, 0, 0), rgb(147, 2, 143));
 } */
+.stat-img{
+    max-width: 200px;
+    height: auto;
+    /* max-height: 200px; */
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -11,6 +13,10 @@ class Article(models.Model):
     author = models.TextField(blank=False)
     text = models.TextField(blank=False)
     published = models.DateTimeField(auto_now=True)
+    # file type that is not text
+    image_file = models.ImageField(blank=True) #makes it optional
+    # when changing have to make migrations and migreate
+
 
     def __str__(self):
         '''return a string rep of this article object'''
@@ -20,6 +26,11 @@ class Article(models.Model):
         '''Return all of the comments about this article.'''
         comments = Comment.objects.filter(article=self)
         return comments
+    
+    def get_absolute_url(self):
+        '''return url that displays instance of itself'''
+        #self.pk is the primary key to this article instancce
+        return reverse('article',kwargs={'pk': self.pk})
     
 class Comment(models.Model):
     '''encapsulate the idea of a comment on an article'''
@@ -35,3 +46,4 @@ class Comment(models.Model):
     def __str__(self):
         '''Return a string representation of this Comment object.'''
         return f'{self.text}'
+    

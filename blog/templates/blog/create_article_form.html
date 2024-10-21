@@ -1,8 +1,10 @@
 {%extends 'blog/base.html'%}
 
 {%block content%}
-<h2>Create a Comment</h2>
-<form method="POST">
+<h2>Create a new Article</h2>
+<!-- didnt save image because we never told the form to encode it
+ without the enctype then we cannot encode the image -->
+<form method="POST" enctype="multipart/form-data">
     {%csrf_token%}
     <!-- creates a class for us and gives a context form we can just display, does all the displaying automatically -->
      <!-- just need the form tags -->
@@ -14,14 +16,14 @@
                 </td>
                 <td>
 
-                    <input type="submit" value="submit" value="Create Comment">
+                    <input type="submit" value="submit" value="Create Article">
                    
                     <!-- sends to the same url it came from -->
                 </td>
             </tr>
       </table>
 </form>
-<form action="{% url 'article' article.pk%}">
+<form action="{% url 'show_all_a'%}">
     <input type="submit" name="Cancel" value="Cancel">
 </form>
 

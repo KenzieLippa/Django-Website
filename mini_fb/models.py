@@ -11,6 +11,7 @@ class Profile(models.Model):
     profile_img = models.URLField(blank=False)
 
 
+
     def __str__(self):
         '''Return the string of the profile?'''
         return f'{self.first_name} {self.last_name}'
@@ -27,6 +28,19 @@ class StatusMsg(models.Model):
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
     text = models.TextField(blank=False)
     timeStamp = models.DateTimeField(auto_now=True)
+    #add here the ability to add an image?
 
     def __str__(self) -> str:
         return f'{self.text}'
+    
+    def get_images(self):
+        '''attempts to figure out how to return a query of images'''
+        return self.image_set.all()
+    
+class Image(models.Model):
+    '''define an image model'''
+    # may not require the profile
+    # profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+    status_msg = models.ForeignKey("StatusMsg", on_delete=models.CASCADE)
+    image = models.ImageField(blank=True)
+    timeStamp = models.DateTimeField(auto_now=True)

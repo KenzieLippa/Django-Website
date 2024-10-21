@@ -73,3 +73,16 @@ class CreateCommentView(CreateView):
         form.instance.article = article
         return super().form_valid(form)
     # use the name instead becuase then it doesnt change later
+
+
+class CreateArticleView(CreateView):
+    '''a view class to create a new article'''
+    form_class = CreateArticleForm
+    template_name = 'blog/create_article_form.html'
+
+    # added in for debugging purposes
+    def form_valid(self, form):
+        '''method is called as part of form processing'''
+        # add in print statement here
+        print(f'CreateArticleView.form_valid(): form.cleaned_data = {form.cleaned_data}')
+        return super().form_valid(form)

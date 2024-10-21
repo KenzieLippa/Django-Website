@@ -29,6 +29,9 @@
 <!-- {{profile.get_stat_msg}} -->
 {%for p in profile.get_stat_msg%}
 <div class="stat-msg">
+    {%for img in p.get_images%}
+    <img class="stat-img" src="{{img.image.url}}" alt="{{img.image.url}}" >
+    {%endfor%}
     <!-- <div class="stat-msg-text"> -->
        <strong>{{p.timeStamp}}</strong> 
        <p>
