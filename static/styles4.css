@@ -125,3 +125,28 @@ input[type="submit"]:hover{
     margin-bottom: 20px;
 
 }
+.tr{
+    padding:30px;
+}
+
+button{
+    background: linear-gradient(135deg, rgb(249, 111, 111), rgb(110, 112, 254));
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 10px grey;
+    transition: all 0.3s ease;
+    transform: scale(1);
+
+}
+button:hover{
+    background: linear-gradient(135deg, rgb(249, 141, 141), rgb(176, 168, 252));
+    color: rgb(134, 2, 148);
+    box-shadow: 0 6px 12px grey;
+    transform: scale(1.1);
+}

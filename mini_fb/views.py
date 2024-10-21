@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from .models import *
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
-from .forms import CreateProfileForm, CreateStatusMsg
+from .forms import CreateProfileForm, CreateStatusMsg, UpdateProfileForm, UpdateStatusMessageForm
 from typing import Any
 
 class ShowAllView(ListView):
@@ -76,3 +76,56 @@ class Create_Status_View(CreateView):
         '''return a url to redirect to after successfully submitting form'''
         return reverse('profile', kwargs={'pk': self.kwargs['pk']})
     
+
+class UpdateProfileView(UpdateView):
+    '''a view for updating our profiles, we also wanna make sure we have a form valid or something'''
+    form_class = UpdateProfileForm
+    template_name = "mini_fb/update_profile_form.html"
+    #mayve need this too?
+    model = Profile
+
+    #hasnt been finding our return url
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+class UpdateStatusMessageView(UpdateView):
+    '''update the status message the same way as before
+    might also have to add something for the images here'''
+    form_class = UpdateStatusMessageForm
+    template_name = "mini_fb/update_status_message_form.html"
+    model = StatusMsg
+    context_object_name = "status_msg"
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    
+    def get_success_url(self):
+        '''return the url to redirect to when we've completed'''
+
+        #get the pk
+        pk= self.kwargs.get('pk')
+        status = StatusMsg.objects.filter(pk=pk).first()
+
+        #find the profile
+        profile = status.profile
+
+        return reverse('profile', kwargs={'pk':profile.pk})
+
+class DeleteStatusMessageView(DeleteView):
+    '''a view to delete our status messages'''
+    template_name = "mini_fb/delete_status_message_form.html"
+    model = StatusMsg
+    context_object_name = 'status_msg'
+
+    def get_success_url(self):
+        '''return the url to redirect to when we've completed'''
+
+        #get the pk
+        pk= self.kwargs.get('pk')
+        status = StatusMsg.objects.filter(pk=pk).first()
+
+        #find the profile
+        profile = status.profile
+
+        return reverse('profile', kwargs={'pk':profile.pk})

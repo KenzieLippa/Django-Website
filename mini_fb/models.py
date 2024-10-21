@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -21,7 +22,10 @@ class Profile(models.Model):
         status = StatusMsg.objects.filter(profile = self)
         return status
         
-    
+    def get_absolute_url(self):
+        '''return url that displays instance of itself'''
+        #self.pk is the primary key to this article instancce
+        return reverse('profile',kwargs={'pk': self.pk})
 
 class StatusMsg(models.Model):
     '''allow users to include a status message'''

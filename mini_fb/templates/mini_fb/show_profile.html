@@ -21,11 +21,13 @@
         <h3 class="city">
             {{profile.city}}
         </h3>
+
+        <button> <a href="{%url 'update_profile' profile.pk%}">Update Profile</a></button>
     </div>
 </div>
 <h2 class="stat-title">Status Messages:</h2>
 
-<h3 class = "stat-title"> <a href="{%url 'create_status' profile.pk%}">Add a status</a></h2>
+<button class="stat-title"> <a href="{%url 'create_status' profile.pk%}">Add a status</a></button>
 <!-- {{profile.get_stat_msg}} -->
 {%for p in profile.get_stat_msg%}
 <div class="stat-msg">
@@ -37,6 +39,11 @@
        <p>
         {{p.text}}
        </p>
+       <!-- add in ablity to update or delete -->
+        <div class="cancel">
+       <button><a href="{%url 'update_status' p.pk%}">Update</a></button>
+        <button><a href="{%url 'delete_status' p.pk%}">Delete</a></button>
+    </div>
     <!-- </div> -->
 </div>
     {%endfor%}
