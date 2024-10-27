@@ -48,5 +48,24 @@
 </div>
     {%endfor%}
 
+    <h2 class="friend-title">{{profile.first_name}}'s Friends:</h2>
+   <div class= "friend-section">
+    {% for friend in profile.get_friends %}
+    <div class="friend-box">
+    <!-- innefficient and could set a variable to be the profile instead but idk how to do variables in html -->
+    {%if friend.profile1 == profile%}
+    <img src="{{friend.profile2.profile_img}}" alt="" >
+    <h2>{{friend.profile2}}</h2>
+    {%endif%}
+    {%if friend.profile2 == profile%}
+    <img src="{{friend.profile1.profile_img}}" alt="" >
+    <h2>{{friend.profile1}}</h2>
+    {%endif%}
+</div>
+
+    {%endfor%}
+</div>
+
+
 {%endif%}
 {%endblock%}

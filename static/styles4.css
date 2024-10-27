@@ -150,3 +150,45 @@ button:hover{
     box-shadow: 0 6px 12px grey;
     transform: scale(1.1);
 }
+.friend-title{
+    margin-left: 20px;
+}
+.friend-section{
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: left;
+
+ /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+ gap: 20px;
+ padding: 20px;
+ justify-items: center;
+}
+.friend-box{
+    width: 200px;
+    height: 200px;
+    background-color: rgb(240, 229, 224);
+    /* border: 2px solid black; */
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 2px 2px 8px grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.friend-box img{
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 0;
+    display: block;
+    margin-top: 10px;
+}
+.friend-box h2{
+    font-size: 1rem;
+    margin: 8px 0 4px;
+    padding: 2px;
+}
