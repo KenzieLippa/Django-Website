@@ -67,6 +67,36 @@ class Profile(models.Model):
         #         print("tru")
 
 
+    def add_friend(self, other):
+        '''will allow the user to add another friend'''
+
+        # make sure the friend does not already exist
+        curr = self.get_friends()
+        can_add = True
+        if other == self:
+            can_add = False
+        # keep can add as true and see if it cannot be added
+        for foo in curr:
+            # print(foo)
+            if foo.profile1 == other:
+                # print("already added!")
+                can_add = False
+            elif foo.profile2 == other:
+                # print("already added too")
+                can_add = False
+
+
+        if can_add:
+            # print("WE CAN ADD THIS YAY!")
+            print(self)
+            print(other)
+
+        
+
+
+    
+
+
 
 class StatusMsg(models.Model):
     '''allow users to include a status message'''

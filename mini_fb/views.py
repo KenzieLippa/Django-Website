@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
@@ -129,3 +129,32 @@ class DeleteStatusMessageView(DeleteView):
         profile = status.profile
 
         return reverse('profile', kwargs={'pk':profile.pk})
+    
+class CreateFriendView(View):
+    '''view for friends, plan is to intercept the parameters in the url and
+    then steal them to create the friend'''
+
+    # override dispatch
+    def dispatch(self, request, *args, **kwargs):
+        #retrieve profile and friend id from url
+        profile_id = self.kwargs.get('pk')
+
+        friend_id = self.kwargs.get('other_pk')
+        # print(f'{profile_id}  {friend_id}')
+        #retrieve profile
+        # profile = get_object_or_404(Profile, pk=profile_id)
+        # friend = get_object_or_404(Profile, pk=friend_id)
+        profile = Profile.objects.filter(pk=profile_id).first()
+        friend = Profile.objects.filter(pk=friend_id).first()
+
+        if not profile or not friend:
+            print("no")
+        # print(f'{profile.first_name}  {friend}')
+        profile.add_friend(friend)
+
+        return redirect('profile', pk=profile_id)
+        # return super().dispatch(request, *args, **kwargs)
+    #read url parameters
+
+
+    #add friend

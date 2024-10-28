@@ -11,5 +11,6 @@ urlpatterns = [
     path('profile/<int:pk>/create_status', Create_Status_View.as_view(), name = 'create_status'),
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name="update_profile"),
     path('delete_status_message/<int:pk>', DeleteStatusMessageView.as_view(), name='delete_status',),
-    path('update_status_message/<int:pk>', UpdateStatusMessageView.as_view(), name="update_status")
+    path('update_status_message/<int:pk>', UpdateStatusMessageView.as_view(), name="update_status"),
+    path('profile/<int:pk>/add_friend/<int:other_pk>', CreateFriendView.as_view(), name='add_friend')
 ]
