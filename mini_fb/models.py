@@ -99,6 +99,7 @@ class Profile(models.Model):
         # start by getting our current friends so we dont suggest them
         curr = self.get_friends()
         new = []
+        # should refactor to mix but idk if i have time so i might just repeat myself a little
         for foo in curr:
             if not foo.profile1.pk == self.pk:
                 new.append(foo.profile1)
@@ -127,9 +128,21 @@ class Profile(models.Model):
            pass # print(friend)
         return new_friends
 
-
+    def get_news_feed(self):
+        '''function to get the newsfeed of friends'''
+        # functions to get all the friends and flatten basically
+        curr = self.get_friends()
+        new = []
+        # should refactor to mix but idk if i have time so i might just repeat myself a little
+        for foo in curr:
+            if not foo.profile1.pk == self.pk:
+                new.append(foo.profile1.pk)
+            elif not foo.profile2.pk == self.pk:
+                new.append(foo.profile2.pk)
         
-
+        feed = StatusMsg.objects.exclude(profile__pk__in=new)
+        # # absolutely going to work first time
+        return feed
 
     
 

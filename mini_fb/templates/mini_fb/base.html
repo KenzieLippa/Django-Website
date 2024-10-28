@@ -9,7 +9,13 @@
             <div class = "cont">
             <ul class="nav-links">
                 <li><a href="{%url 'show_all'%}">Home</a></li>
-                <li><a href="{%url 'show_all'%}">Coming Soon!</a></li>
+                <!-- want to add link back to profile but not sure how pk is being passed through here -->
+                 {%if profile.pk%}
+                <li><a href="{%url 'news_feed' profile.pk%}">Feed</a></li>
+                {%else%}
+                <li><a href="{%url 'news_feed' 1%}">Feed</a></li>
+                {%endif%}
+                
                 <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
                 <li><a href="{%url 'about'%}">About</a></li> -->
             </ul>

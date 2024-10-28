@@ -166,3 +166,13 @@ class CreateFriendView(View):
 
 
     #add friend
+class ShowNewsFeedView(DetailView):
+    '''a view for our wonderous feed'''
+    template_name = "mini_fb/news_feed.html"
+    model = Profile
+    # context_object_name = 'status_msg'
+
+    # def get_queryset(self):
+    #     profile = Profile.objects.get(pk=self.kwargs['pk'])
+    #     return profile.get_news_feed()
+
