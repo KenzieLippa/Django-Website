@@ -10,6 +10,11 @@
             <ul class="nav-links">
                 <li><a href="{%url 'show_all'%}">Home</a></li>
                 <!-- want to add link back to profile but not sure how pk is being passed through here -->
+                {%if profile.pk%}
+                <li><a href="{%url 'profile' profile.pk%}">Profile</a></li>
+                {%else%}
+                <li><a href="{%url 'profile' 1%}">Profile</a></li>
+                {%endif%}
                  {%if profile.pk%}
                 <li><a href="{%url 'news_feed' profile.pk%}">Feed</a></li>
                 {%else%}

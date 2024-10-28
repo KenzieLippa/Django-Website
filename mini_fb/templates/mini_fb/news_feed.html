@@ -2,12 +2,27 @@
 {%load static%}
 {%block content%}
 <link rel="stylesheet" href="{%static 'styles4.css'%}">
+<h1 class="page-title">{{profile.first_name}}'s Feed</h1>
+<div class="main-news">
 {%for msg in profile.get_news_feed%}
 <div class="news-box">
-    <img src="{{msg.profile.profile_img}}" alt="" class="news-profile">
-    <p>{{msg.profile.first_name}} {{msg.profile.last_name}}        {{msg.timeStamp}}</p>
+    <img class="news-img" src="{{msg.profile.profile_img}}" alt="" class="news-profile">
+    <div class="status-info">
+
+   
+    <p><strong>{{msg.profile.first_name}} {{msg.profile.last_name}}  </strong></p>
+        <span class="timeStamp">{{msg.timeStamp}}</span>
+</div>
+<div class="status-text">
     <h3>{{msg.text}}</h3>
 </div>
-{%endfor%}
+<div class="post-img">
+{%for img in msg.get_images%}
+    <img class="post-img-e" src="{{img.image.url}}" alt="{{img.image.url}}" >
+    {%endfor%}
 
+</div>
+</div>
+{%endfor%}
+</div>
 {%endblock%}

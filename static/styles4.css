@@ -220,3 +220,61 @@ button:hover{
 .foo{
     margin: 20px;
 }
+
+.main-news{
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-box{
+    /* border: 1px solid #cccccc; */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: rgb(240, 229, 224);
+    box-shadow: 0 6px 12px grey;
+}
+
+.news-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin:0;
+    margin-right: 15px;
+}
+
+.status-info{
+    display: flex;
+    flex-direction: column;
+}
+.timeStamp{
+    font-size: 0.9em;
+    color: #666666;
+}
+.status-text{
+    font-size: 1em;
+    color: #333333;
+    padding-top: 10px;
+}
+
+.post-img{
+    /* border-radius: 0px; */
+    margin-top: 10px;
+    margin-left: 12%;
+    width:100%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+   
+
+}
+.post-img-e{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius:8px ;
+    
+
+}
