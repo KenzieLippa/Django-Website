@@ -129,7 +129,15 @@ class DeleteStatusMessageView(DeleteView):
         profile = status.profile
 
         return reverse('profile', kwargs={'pk':profile.pk})
+
+class ShowFriendSuggestionsView(DetailView):
+    template_name = "mini_fb/friend_suggestions.html"
+    model = Profile
+
     
+    def get_success_url(self):
+        pk = self.kwargs.get('pk')
+        return reverse('profile',kwargs={'pk':pk})
 class CreateFriendView(View):
     '''view for friends, plan is to intercept the parameters in the url and
     then steal them to create the friend'''
@@ -146,7 +154,7 @@ class CreateFriendView(View):
         # friend = get_object_or_404(Profile, pk=friend_id)
         profile = Profile.objects.filter(pk=profile_id).first()
         friend = Profile.objects.filter(pk=friend_id).first()
-
+        print("CALLED")
         if not profile or not friend:
             print("no")
         # print(f'{profile.first_name}  {friend}')

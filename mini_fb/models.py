@@ -91,6 +91,43 @@ class Profile(models.Model):
             print(self)
             print(other)
 
+            # forgot to add
+            Friend.objects.create(profile1=self, profile2=other)
+    
+    def get_friend_suggestions(self):
+        '''figure out what friends we could make'''
+        # start by getting our current friends so we dont suggest them
+        curr = self.get_friends()
+        new = []
+        for foo in curr:
+            if not foo.profile1.pk == self.pk:
+                new.append(foo.profile1)
+            elif not foo.profile2.pk == self.pk:
+                new.append(foo.profile2)
+
+        friend_ids = [friend.pk for friend in new]
+        friend_ids.append(self.pk)
+            # print(foo)
+        # print("CALLED")
+        # friend_ids = [friend.pk for friend in curr]
+        # for id in friend_ids:
+        #     print(id)
+
+        new_friends = Profile.objects.exclude(pk__in=friend_ids)
+
+        # for friend in new:
+        #     print(friend)
+            # new_friends = new_friends.exclude(first_name__startswith=friend.first_name)
+        # all_friend = Profile.objects.all()
+        # # new_friend = []
+        # for foo in curr:
+        #     all_friend.exclude(first_name__exact=foo.first_name)
+        #     print(foo)
+        for friend in new_friends: 
+           pass # print(friend)
+        return new_friends
+
+
         
 
 

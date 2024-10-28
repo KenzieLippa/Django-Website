@@ -28,7 +28,7 @@
 <h2 class="stat-title">Status Messages:</h2>
 
 <button class="stat-title"> <a href="{%url 'create_status' profile.pk%}">Add a status</a></button>
-<button class="stat-title"> {{profile.add_friend}}Add a Friend</button>
+<!-- <button class="stat-title"> {{profile.add_friend}}Add a Friend</button> -->
 <!-- {{profile.get_stat_msg}} -->
 {%for p in profile.get_stat_msg%}
 <div class="stat-msg">
