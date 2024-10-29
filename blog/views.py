@@ -7,6 +7,8 @@ from .forms import * ##import the forms for create comment
 from django.urls import reverse
 from typing import Any
 
+from django.contrib.auth.mixins import LoginRequiredMixin ## mixins for views to add special features like login required
+
 # import random
 import random
 # Create your views here.
@@ -17,7 +19,10 @@ class ShowAllView(ListView):
     model = Article #retrieve objects of type article from db
     template_name = 'blog/show_all.html'
     context_object_name = 'articles' #how to find the data in the template files
-
+    def dispatch(self, request, *args, **kwargs):
+        '''impliment for debug tracing'''
+        print(f"ShowAllView.dispatch; self.request.user={self.request.user}")
+        return super().dispatch(request, *args, **kwargs)
 
 class RandomArticleView(DetailView):
     '''where list view shows all, detail shows one, is an object of type article'''
@@ -69,20 +74,35 @@ class CreateCommentView(CreateView):
         print(f"CreateCommentView.form_valid() form = {form}")
         print(f'CreateCommentView.grom_valid(): self.kwargs={self.kwargs}')
 
+        
         article = Article.objects.get(pk=self.kwargs['pk'])
         form.instance.article = article
         return super().form_valid(form)
     # use the name instead becuase then it doesnt change later
 
 
-class CreateArticleView(CreateView):
+class CreateArticleView(LoginRequiredMixin, CreateView):
     '''a view class to create a new article'''
+    # can inheret from multiple classes
+    # order of passing determins presidence, in c++ when doing this you have to specify
+    # requires login, tell it where the login is located
     form_class = CreateArticleForm
     template_name = 'blog/create_article_form.html'
+
+    def get_login_url(self):
+        '''return the URL of the login page'''
+        # super class version trying to go somewhere where it doesnt exist
+        return reverse('login') #look  up the page, use this url
 
     # added in for debugging purposes
     def form_valid(self, form):
         '''method is called as part of form processing'''
         # add in print statement here
         print(f'CreateArticleView.form_valid(): form.cleaned_data = {form.cleaned_data}')
+
+        #find a user who is logged in
+        user = self.request.user
+        # attach the user to the article on submit
+        form.instance.user = user
+        #attach that user as a fk to the new article instance
         return super().form_valid(form)

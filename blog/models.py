@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+#need django user account
+
 
 
 # Create your models here.
@@ -9,6 +12,8 @@ from django.urls import reverse
 class Article(models.Model):
     '''encapsulate the idea of an article by some author'''
     #data attributse of an article
+    #every article has one user:
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField(blank=False)
     author = models.TextField(blank=False)
     text = models.TextField(blank=False)
@@ -16,7 +21,7 @@ class Article(models.Model):
     # file type that is not text
     image_file = models.ImageField(blank=True) #makes it optional
     # when changing have to make migrations and migreate
-
+# assosciate existing ones in minifb with admin
 
     def __str__(self):
         '''return a string rep of this article object'''

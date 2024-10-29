@@ -12,12 +12,34 @@
                 <li><a href="{%url 'random'%}">Random Article</a></li>
                 <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
                 <li><a href="{%url 'about'%}">About</a></li> -->
+                <!-- urls for logged in user -->
+                {%if request.user.is_authenticated%}
+                <li><a href="{%url 'create_article'%}">Create Article</a></li>
+                <!-- need to run a post instead for some stupid reason -->
+                 <!-- interesting, have to start giving up chat hes a meany pants in many ways -->
+                <!-- <li><a href="{%url 'logout' %}">Log Out</a></li> -->
+                <form action="{%url 'logout' %}" method="POST">
+                    {%csrf_token%}
+                    <input type="submit" value="logout">
+                </form>
+                {%else%}
+                <li><a href="{%url 'login' %}">Login</a></li>
+                {%endif%}
             </ul>
         </div>
         </nav>
         <div class="page-title">
 
         </div>
+        <!-- request is the http request object -->
+        <p class="page-title">
+            {%if request.user.is_authenticated%}
+            {{request.user}} is logged in
+            {%else%}
+            Not Logged in
+            {%endif%}
+        </p>
+
         {%block content%}
         {%endblock%}
 
