@@ -16,9 +16,9 @@
                 <li><a href="{%url 'profile' 1%}">Profile</a></li>
                 {%endif%}
                  {%if profile.pk%}
-                <li><a href="{%url 'news_feed' profile.pk%}">Feed</a></li>
+                <li><a href="{%url 'news_feed' %}">Feed</a></li>
                 {%else%}
-                <li><a href="{%url 'news_feed' 1%}">Feed</a></li>
+                <li><a href="{%url 'news_feed'%}">Feed</a></li>
                 {%endif%}
 
                 {%if request.user.is_authenticated%}

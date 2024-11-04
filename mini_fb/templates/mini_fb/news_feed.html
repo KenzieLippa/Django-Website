@@ -2,7 +2,7 @@
 {%load static%}
 {%block content%}
 <link rel="stylesheet" href="{%static 'styles4.css'%}">
-<h1 class="page-title">{{profile.first_name}}'s Feed</h1>
+<h1 class="feed-title">{{profile.first_name}}'s Feed</h1>
 <div class="main-news">
 {%for msg in profile.get_news_feed%}
 <div class="news-box">

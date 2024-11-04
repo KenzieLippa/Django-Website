@@ -2,7 +2,7 @@
 {%load static%}
 {%block content%}
 <link rel="stylesheet" href="{%static 'styles4.css'%}">
-    <h2 class="page-title">{{profile.first_name}}'s Friend Suggestions:</h2>
+    <h2 class="feed-title">{{profile.first_name}}'s Friend Suggestions:</h2>
    <div class= "friend-section">
     {% for friend in profile.get_friend_suggestions %}
     <div class="friend-box-sug">
@@ -12,7 +12,7 @@
     <h2>{{friend.first_name}} {{friend.last_name}}</h2>
     
   
-    <button class="stat-title"> <a href="{%url 'add_friend' profile.pk friend.pk %}">Add a Friend</a></button>
+    <button class="stat-title"> <a href="{%url 'add_friend' friend.pk %}">Add a Friend</a></button>
 </div>
 {%endfor%}
 

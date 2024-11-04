@@ -67,16 +67,28 @@ class Create_Status_View(LoginRequiredMixin, CreateView):
     def get_login_url(self):
         return reverse('login')
     
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
 
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
+    
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''build the dict of context data for this view'''
         context = super().get_context_data(**kwargs)
 
         #find pk from url
-        pk = self.kwargs['pk']
+        # pk = self.kwargs['pk']
 
         # find corresponding profile
-        profile = Profile.objects.get(pk=pk)
+        # profile = Profile.objects.get(pk=pk)
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
 
         #add profile to context data
         context['profile'] = profile
@@ -84,7 +96,11 @@ class Create_Status_View(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         '''handle the form submission and set a foreign key by attaching the profile to the status, can find the profile pk in url'''
-        profile = Profile.objects.get(pk=self.kwargs['pk'])
+        # profile = Profile.objects.get(pk=self.kwargs['pk'])
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
         form.instance.profile = profile
         #save the status msg to the db
         sm = form.save()
@@ -103,7 +119,9 @@ class Create_Status_View(LoginRequiredMixin, CreateView):
     
     def get_success_url(self) -> str:
         '''return a url to redirect to after successfully submitting form'''
-        return reverse('profile', kwargs={'pk': self.kwargs['pk']})
+        profile = self.get_object()
+        print(profile.pk)
+        return reverse('profile', kwargs={'pk':profile.pk})
     
 
 class UpdateProfileView(LoginRequiredMixin, UpdateView):
@@ -119,6 +137,15 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     #hasnt been finding our return url
     def form_valid(self, form):
         return super().form_valid(form)
+    
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
     
 class UpdateStatusMessageView(UpdateView):
     '''update the status message the same way as before
@@ -173,21 +200,41 @@ class ShowFriendSuggestionsView(DetailView):
     def get_success_url(self):
         pk = self.kwargs.get('pk')
         return reverse('profile',kwargs={'pk':pk})
+    
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
 class CreateFriendView(View):
     '''view for friends, plan is to intercept the parameters in the url and
     then steal them to create the friend'''
 
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
+    
     # override dispatch
     def dispatch(self, request, *args, **kwargs):
         #retrieve profile and friend id from url
-        profile_id = self.kwargs.get('pk')
+        # profile_id = self.kwargs.get('pk')
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
 
         friend_id = self.kwargs.get('other_pk')
         # print(f'{profile_id}  {friend_id}')
         #retrieve profile
         # profile = get_object_or_404(Profile, pk=profile_id)
         # friend = get_object_or_404(Profile, pk=friend_id)
-        profile = Profile.objects.filter(pk=profile_id).first()
+        # profile = Profile.objects.filter(user=profile_id).first()
         friend = Profile.objects.filter(pk=friend_id).first()
         print("CALLED")
         if not profile or not friend:
@@ -195,18 +242,29 @@ class CreateFriendView(View):
         # print(f'{profile.first_name}  {friend}')
         profile.add_friend(friend)
 
-        return redirect('profile', pk=profile_id)
+        return redirect('profile', profile.pk)
         # return super().dispatch(request, *args, **kwargs)
     #read url parameters
 
 
     #add friend
-class ShowNewsFeedView(DetailView):
+class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     '''a view for our wonderous feed'''
     template_name = "mini_fb/news_feed.html"
     model = Profile
-    # context_object_name = 'status_msg'
 
+    def get_login_url(self):
+        return reverse('login')
+    # context_object_name = 'status_msg'
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
+    
     # def get_queryset(self):
     #     profile = Profile.objects.get(pk=self.kwargs['pk'])
     #     return profile.get_news_feed()

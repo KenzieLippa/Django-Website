@@ -69,7 +69,14 @@ class Profile(models.Model):
         # for friend in Friend.objects:
         #     if friend.profile1 == self or friend.profile2 == self:
         #         print("tru")
+    def get_object(self):
+    # get logged in user
+        # maybe add an if pk but idk
+        user = self.request.user
 
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        return profile
 
     def add_friend(self, other):
         '''will allow the user to add another friend'''
@@ -139,12 +146,25 @@ class Profile(models.Model):
         new = []
         # should refactor to mix but idk if i have time so i might just repeat myself a little
         for foo in curr:
-            if not foo.profile1.pk == self.pk:
+            print(foo)
+            if not foo.profile1.pk in new:
+                # print(foo.profile1.pk)
+                # print(new)
                 new.append(foo.profile1.pk)
-            elif not foo.profile2.pk == self.pk:
+            if not foo.profile2.pk in new:
+                # print(foo)
+                # print(new)
                 new.append(foo.profile2.pk)
+            # else:
+            #     new.append(foo.profile1.pk)
+            #     new.append(foo.profile2.pk)
+            # if not foo.profile1.pk == self.pk:
+            #     new.append(foo.profile1.pk)
+            # elif not foo.profile2.pk == self.pk:
+            #     new.append(foo.profile2.pk)
         
-        feed = StatusMsg.objects.exclude(profile__pk__in=new)
+        feed = StatusMsg.objects.filter(profile__pk__in=new)
+        feed = feed.order_by('-timeStamp')
         # # absolutely going to work first time
         return feed
 
