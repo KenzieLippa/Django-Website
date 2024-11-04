@@ -24,7 +24,7 @@
         {%if request.user == profile.user%}
         <button> <a href="{%url 'update_profile'%}">Update Profile</a></button>
         {%else%}
-        <h3 class="must-login">You must be logged in to update your profile</h3>
+        <h3 class="must-login">You can only update your own profile</h3>
         {%endif%}
     </div>
 </div>
@@ -32,7 +32,7 @@
 {%if request.user == profile.user%}
 <button class="stat-title"> <a href="{%url 'create_status' %}">Add a status</a></button>
 {%else%}
-<h3 class="must-login">You must be logged in to post a status message</h3>
+<h3 class="must-login">You can only post from your own page</h3>
 {%endif%}
 <!-- <button class="stat-title"> {{profile.add_friend}}Add a Friend</button> -->
 <!-- {{profile.get_stat_msg}} -->

@@ -5,9 +5,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateProfileForm, CreateStatusMsg, UpdateProfileForm, UpdateStatusMessageForm
 from typing import Any
+from django.contrib.auth import login
+
 
 class ShowAllView(ListView):
     '''create a view to show all the portraits'''
@@ -29,14 +31,13 @@ class ShowProfile(DetailView):
     template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
 
-class Create_Profile_View(LoginRequiredMixin, CreateView):
+class Create_Profile_View(CreateView):
     # adding the login mixin to both this and the other
     '''a view to create a new profile and save to the database'''
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
+    # user_create = UserCreationForm #not sure if this is the right place
 
-    def get_login_url(self):
-        return reverse('login')
     
 
     def get_success_url(self) -> str:
@@ -48,15 +49,36 @@ class Create_Profile_View(LoginRequiredMixin, CreateView):
         # profile = Profile.objects.get(pk=self.kwargs['pk'])
         # form.instance.profile = profile
         print(f'CreateProfileView: form.cleaned_data={form.cleaned_data}')
+        # if self.request.POST:
+        user_create = UserCreationForm(self.request.POST)
+        if not user_create.is_valid():
+            print(f"form.errors={user_create.errors}")
+            return super().form_invalid(form)
+            
+        user = user_create.save()
+        
+        # form.instance.user = user
 
-        # find logged in user
-        user = self.request.user
+            # login the user
         print(f"Create_Profile_View user={user} profile.user={user}")
-
-        # attach user to form instance article object
         form.instance.user = user
+        login(self.request, user)
 
+
+        
         return super().form_valid(form)
+    
+
+    def get_context_data(self, **kwargs):
+        # gets teh context dictionary from the base class
+        context = super().get_context_data(**kwargs)
+
+        #creates the instance of the form which can be passed through
+        # user_create_form = self.user_create(self.request.POST) #there is no way this is gonna work lol
+
+        # add user form to the context
+        context['user_create_form'] = UserCreationForm()
+        return context
     
 class Create_Status_View(LoginRequiredMixin, CreateView):
     # do the login mixins here too for now

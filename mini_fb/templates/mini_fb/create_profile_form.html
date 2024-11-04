@@ -7,6 +7,7 @@
 <h2>Create a New Profile</h2>
 <form method="post">
     {%csrf_token%}
+    {{user_create_form.as_p}}
     {{form.as_p}}
     <div class="cancel">
 <input type="submit" name= 'add a profile' value="Add a Profile">
