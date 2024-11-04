@@ -80,6 +80,11 @@ form input, form textarea{
     box-sizing: border-box;
     margin-bottom: 40px;
 }
+input[type="password"]{
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    /* color: pink; */
+}
 /* form urlfield{
 
 } */
@@ -93,15 +98,16 @@ input[type="submit"]{
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 0 4px 10px grey;
+    box-shadow: 0 4px 10px black;
     transition: all 0.3s ease;
     transform: scale(1);
+    margin-top: 10px;
 
 }
 input[type="submit"]:hover{
     background: linear-gradient(135deg, rgb(249, 141, 141), rgb(176, 168, 252));
     color: rgb(134, 2, 148);
-    box-shadow: 0 6px 12px grey;
+    box-shadow: 0 6px 12px black;
     transform: scale(1.1);
 }
 
@@ -277,4 +283,12 @@ button:hover{
     border-radius:8px ;
     
 
+}
+
+.must-login{
+    color: red;
+    
+}
+.feed-title{
+    margin-top:100px;
 }
