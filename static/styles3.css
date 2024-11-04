@@ -299,7 +299,7 @@ button{
 button:hover{
     background: linear-gradient(135deg, rgb(249, 141, 141), rgb(176, 168, 252));
     color: rgb(134, 2, 148);
-    box-shadow: 0 6px 12px grey;
+    /* box-shadow: 0 6px 12px grey; */
     transform: scale(1.1);
 }
 
@@ -313,7 +313,7 @@ input[type="submit"]{
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 0 4px 10px grey;
+    /* box-shadow: 0 4px 10px grey; */
     transition: all 0.3s ease;
     transform: scale(1);
 
