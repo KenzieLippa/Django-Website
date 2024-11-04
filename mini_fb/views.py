@@ -4,6 +4,8 @@ from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .forms import CreateProfileForm, CreateStatusMsg, UpdateProfileForm, UpdateStatusMessageForm
 from typing import Any
 
@@ -12,6 +14,13 @@ class ShowAllView(ListView):
     model = Profile
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles'
+
+    # add a dispatch method maybe like from class
+    def dispatch(self, req):
+        '''add to show the logged in user and to debug it'''
+        print(f"Logged in user: req.user={req.user}")
+        print(f"Logged in user: req.user.is_authenticated={req.user.is_authenticated}")
+        return super().dispatch(req)
 # Create your views here.
 
 class ShowProfile(DetailView):
@@ -20,10 +29,15 @@ class ShowProfile(DetailView):
     template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
 
-class Create_Profile_View(CreateView):
+class Create_Profile_View(LoginRequiredMixin, CreateView):
+    # adding the login mixin to both this and the other
     '''a view to create a new profile and save to the database'''
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
+
+    def get_login_url(self):
+        return reverse('login')
+    
 
     def get_success_url(self) -> str:
         '''redirect the url after successfully submitting form'''
@@ -33,12 +47,27 @@ class Create_Profile_View(CreateView):
         '''handle the form submission and get the foreign key?'''
         # profile = Profile.objects.get(pk=self.kwargs['pk'])
         # form.instance.profile = profile
+        print(f'CreateProfileView: form.cleaned_data={form.cleaned_data}')
+
+        # find logged in user
+        user = self.request.user
+        print(f"Create_Profile_View user={user} profile.user={user}")
+
+        # attach user to form instance article object
+        form.instance.user = user
+
         return super().form_valid(form)
     
-class Create_Status_View(CreateView):
+class Create_Status_View(LoginRequiredMixin, CreateView):
+    # do the login mixins here too for now
     '''a view to create a new status and save it to the database'''
     form_class = CreateStatusMsg
     template_name = "mini_fb/create_status_form.html"
+
+    def get_login_url(self):
+        return reverse('login')
+    
+
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''build the dict of context data for this view'''
         context = super().get_context_data(**kwargs)
@@ -77,12 +106,15 @@ class Create_Status_View(CreateView):
         return reverse('profile', kwargs={'pk': self.kwargs['pk']})
     
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     '''a view for updating our profiles, we also wanna make sure we have a form valid or something'''
     form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"
     #mayve need this too?
     model = Profile
+
+    def get_login_url(self):
+        return reverse('login')
 
     #hasnt been finding our return url
     def form_valid(self, form):
@@ -112,11 +144,14 @@ class UpdateStatusMessageView(UpdateView):
 
         return reverse('profile', kwargs={'pk':profile.pk})
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     '''a view to delete our status messages'''
     template_name = "mini_fb/delete_status_form.html"
     model = StatusMsg
     context_object_name = 'status_msg'
+
+    def get_login_url(self):
+        return reverse('login')
 
     def get_success_url(self):
         '''return the url to redirect to when we've completed'''

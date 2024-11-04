@@ -1,5 +1,7 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
+
 from .views import *
 
 urlpatterns = [
@@ -15,4 +17,6 @@ urlpatterns = [
     path('profile/<int:pk>/add_friend/<int:other_pk>', CreateFriendView.as_view(), name='add_friend'),
     path('profile/<int:pk>/friend_suggestions', ShowFriendSuggestionsView.as_view(), name='friend_suggestion'),
     path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name="news_feed"),
+    path('login/', auth_views.LoginView.as_view(template_name='mini_fb/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='show_all'), name='logout'),
 ]
