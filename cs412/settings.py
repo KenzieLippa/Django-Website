@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'restaurant',
     'blog',
     'mini_fb',
-    
+    'marathon_minutes',
+    'oregonTrail',
+    'voter_analytics',
     # can hide by commenting out in this list
 ]
 
