@@ -95,7 +95,7 @@ class VoterDetailView(DetailView):
 
 class GraphView(ListView):
     '''view to display the information for the voter base, will eventually need to figure out how to do the filter'''
-    template_name = 'voter_analytics/graph.html'
+    template_name = 'voter_analytics/graphs.html'
     model = Voter
     # context_object_name ='v'
 
