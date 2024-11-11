@@ -44,13 +44,13 @@ INSTALLED_APPS = [
     'blog',
     'mini_fb',
     'voter_analytics',
-    'csp',
+    # 'csp',
     # due to a horrible error with java script the files from class were removed
     
     # can hide by commenting out in this list
 ]
-CSP_DEFAULT_SRC = ["'self'"]
-CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"]
+# CSP_DEFAULT_SRC = ["'self'"]
+# CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
