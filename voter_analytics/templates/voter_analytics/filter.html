@@ -1,0 +1,43 @@
+<table>
+    <form action="{%url 'voter_list' %}">
+        <tr>
+            <th>Party Affiliation:</th>
+            <td><input type="text" name="party_affiliation"></td>
+        </tr>
+        <tr>
+            <th>Minumum Birthdate</th>
+            <td><input type="date" name="birthdate_min"></td>
+        </tr>
+        <tr>
+            <th>Maximum Birthdate</th>
+            <td><input type="date" name="birthdate_max"></td>
+        </tr>
+        <tr>
+            <th>Voter Score:</th>
+            <td><input type="text" name="voter_score"></td>
+        </tr>
+        <tr>
+            <th>Voted in 2020 State</th>
+            <td><input type="checkbox" name="v20state" id=""></td>
+        </tr>
+        <tr>
+            <th>Voted in 2021 Town</th>
+            <td><input type="checkbox" name="v21town" id=""></td>
+        </tr>
+        <tr>
+            <th>Voted in 2021 Primary</th>
+            <td><input type="checkbox" name="v21primary" id=""></td>
+        </tr>
+        <tr>
+            <th>Voted in 2022 General</th>
+            <td><input type="checkbox" name="v22general" id=""></td>
+        </tr>
+        <tr>
+            <th>Voted in 2023 Town</th>
+            <td><input type="checkbox" name="v23town" id=""></td>
+        </tr>
+        <tr>
+            <td><input type="submit"></td>
+        </tr>
+    </form>
+</table>

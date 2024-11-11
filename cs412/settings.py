@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'restaurant',
     'blog',
     'mini_fb',
+    'voter_analytics',
+    # due to a horrible error with java script the files from class were removed
     
     # can hide by commenting out in this list
 ]

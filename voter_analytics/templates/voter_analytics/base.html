@@ -1,0 +1,22 @@
+{%load static%}
+
+<html>
+    <head><title>Voter Analytics</title>
+    <link rel="stylesheet" href="{%static 'styles5.css'%}">
+
+    </head>
+    <body>
+        <nav class="joes-nav">
+            <div class = "cont">
+            <ul class="nav-links">
+                <li><a href="{%url 'voters'%}">Show All</a></li>
+                <li><a href="{%url 'graphs'%}">Graph Results</a></li>
+            </ul>
+            </div>
+        </nav>
+        {%block content%}
+        {%endblock%}
+        
+    </body>
+
+</html>
