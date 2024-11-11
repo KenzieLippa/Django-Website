@@ -109,6 +109,15 @@ th, td{
 
 
 }
+.graph-container{
+    margin-top: 10%;
+}
+.graph-butt{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .google{
     margin-top: 5%;
 }
@@ -149,6 +158,8 @@ button{
     box-shadow: 0 4px 10px grey;
     transition: all 0.3s ease;
     transform: scale(1);
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 button:hover{
