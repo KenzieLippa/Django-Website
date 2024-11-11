@@ -1,0 +1,42 @@
+{%extends 'voter_analytics/base.html'%}
+{%block content%}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Zip Code</th>
+        <th>Date of Birth</th>
+        <th>Date of Registration</th>
+        <th>Party Affiliation</th>
+        <th>Precinct Number</th>
+        <th>v20state</th>
+        <th>v21town</th>
+        <th>v21primary</th>
+        <th>v22general</th>
+        <th>v23town</th>
+        <th>Voter Score</th>
+    </tr>
+    <tr>
+        <td>{{v.first_name}} {{v.last_name}}</td>
+        <td>{{v.street_num}} {{v.street_name}} Apt# {{v.apartment_num}}</td>
+        <td>{{v.zip_code}}</td>
+        <td>{{v.birthdate}}</td>
+        <td>{{v.registration_date}}</td>
+        <td>{{v.party_affiliation}}</td>
+        <td>{{v.precinct_num}}</td>
+        <td>{{v.v20state}}</td>
+        <td>{{v.v21town}}</td>
+        <td>{{v.v21primary}}</td>
+        <td>{{v.v22general}}</td>
+        <td>{{v.v23town}}</td>
+        <td>{{v.voter_score}}</td>
+
+    </tr>
+    <tr>
+        
+    </tr>
+</table>
+<a href="https://www.google.com/maps/search/?api=1&query={{v.street_num}}+{{v.street_name}}+{{v.zip_code}}" target="_blank">
+    <button class = "google"> View Address on Google Maps</button>
+ </a>
+{%endblock%}

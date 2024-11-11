@@ -59,7 +59,7 @@ def load_data():
                         zip_code = fields[6],
                         birthdate = fields[7],
                         registration_date = fields[8],
-                        party_affiliation = fields[9],
+                        party_affiliation = fields[9].strip(),
                         precinct_num = fields[10],
                         v20state = fields[11],
                         v21town = fields[12],
