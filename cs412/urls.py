@@ -26,7 +26,7 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")),
     path("blog/", include("blog.urls")),
     path("mini_fb/", include("mini_fb.urls")),
-    path("oregonTrail/", include("oregonTrail.urls")),
+    # path("oregonTrail/", include("oregonTrail.urls")),
     path("marathon_minutes/", include("marathon_minutes.urls")),
     path("voter_analytics/", include("voter_analytics.urls")),
 ] 
