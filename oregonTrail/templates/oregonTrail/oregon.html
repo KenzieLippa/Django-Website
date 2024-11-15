@@ -11,18 +11,44 @@
 
 <!-- test to get the images  -->
  <script>
-    const sky = "{%static 'GameFiles/assets/space3.png'%}";
-    const logo = "{%static 'GameFiles/assets/phaser3-logo.png'%}";
-    const particle = "{%static 'GameFiles/assets/red.png'%}";
-    
+    // const sky = "{%static 'GameFiles/assets/space3.png'%}";
+    // const logo = "{%static 'GameFiles/assets/phaser3-logo.png'%}";
+    // const particle = "{%static 'GameFiles/assets/red.png'%}";
+    //test worked
     // stuff for my background 
     const wind = "{%static 'GameFiles/assets/Wind.png'%}";
     const trees = "{%static 'GameFiles/assets/Trees.png'%}";
     const forest_background = "{%static 'GameFiles/assets/ForestBackground.png'%}";
     const forest_foreground = "{%static 'GameFiles/assets/ForestForeground.PNG'%}";
 
+    const isRunning = false;
+
 
  </script>
+ <button id="test">Run</button>
+ <script>
+     fetch('toggle_game_state/', {
+                method: 'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const is_running = data.is_running;
+                console.log("Initial is_running state:", is_running);
+    
+                // Set up game elements based on `is_running`
+                if (this.is_running) {
+                    document.getElementById("test").innerHTML = isRunning ? "Stop" : "Run";
+                    // Start or resume game logic
+                } else {
+                    // Pause game logic
+                }
+            })
+            .catch(error => console.error('Error:', error));
+ </script>
+
 <script src="{% static 'GameFiles/scripts/game.js' %}">
     
     // var config = {
