@@ -29,6 +29,7 @@ urlpatterns = [
     path("voter_analytics/", include("voter_analytics.urls")),
     path("oregonTrail/", include("oregonTrail.urls")),
     path("fightingTest/", include("fightingTest.urls")),
+    path("marathon_minutes/", include("marathon_minutes.urls")),
 ] 
 urlpatterns += static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

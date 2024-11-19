@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'voter_analytics',
     'oregonTrail',
     'fightingTest',
+    'db_examples',
+    'marathon_minutes',
     # 'csp',
     # due to a horrible error with java script the files from class were removed
     
