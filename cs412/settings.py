@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'mini_fb',
     'voter_analytics',
     'oregonTrail',
+    'fightingTest',
     # 'csp',
     # due to a horrible error with java script the files from class were removed
     
