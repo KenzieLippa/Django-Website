@@ -1,0 +1,40 @@
+{%load static%}
+<html>
+    <head>
+        <title>Oregon Trail</title>
+        <!-- TODO: change this later to not suck and be this group specific -->
+        <link rel="stylesheet" href="{% static "styles3.css" %}">
+    </head>
+    <body>
+        <nav class="joes-nav">
+            <div class = "cont">
+            <ul class="nav-links">
+                <li><a href="{%url 'show_all'%}">Home</a></li>
+                <!-- want to add link back to profile but not sure how pk is being passed through here -->
+               
+                {%if request.user.is_authenticated%}
+               
+                <form action="{%url 'logout-O' %}" method="POST">
+                    {%csrf_token%}
+                    <input type="submit" value="logout">
+                </form>
+                {%else%}
+                <li><a href="{%url 'login-O' %}">Login</a></li>
+                {%endif%}
+                
+                <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
+                <li><a href="{%url 'about'%}">About</a></li> -->
+            </ul>
+        </div>
+        </nav>
+        <div>
+            <!-- <h1 class="page-title">
+                ------------------------------------------------------------------------------------------------------
+            </h1> -->
+
+        </div>
+        {%block content%}
+        {%endblock%}
+
+    </body>
+</html>

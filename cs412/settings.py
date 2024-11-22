@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'fightingTest',
     'db_examples',
     'marathon_minutes',
+    'OregonTrail_V2', #done with vanilla js ect
     # 'csp',
     # due to a horrible error with java script the files from class were removed
     

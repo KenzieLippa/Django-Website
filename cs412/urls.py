@@ -30,6 +30,7 @@ urlpatterns = [
     path("oregonTrail/", include("oregonTrail.urls")),
     path("fightingTest/", include("fightingTest.urls")),
     path("marathon_minutes/", include("marathon_minutes.urls")),
+    path('', include("OregonTrail_V2.urls")), ## Make the home page for now
 ] 
 urlpatterns += static (settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
