@@ -1,0 +1,27 @@
+{% extends 'OregonTrail_V2/base.html' %}
+
+{%load static%}
+{%block content%}
+
+<link rel="stylesheet" href="{% static 'styles4.css'%}">
+<div class="add-prof">
+<h2 class="page-title">Create a New Player</h2>
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <div class="cancel">
+<input type="submit" name= 'add a player' value="Create!">
+
+
+</form>
+<!-- IF THERES TIME FIX THIS -->
+<!-- <form method = "post" action="{%url 'create_player'%}">
+    {%csrf_token%}
+    <input type="submit" name = "custom" value="Create and Add Another">
+</form> -->
+<form action="{%url 'create_game'%}">
+    <input type="submit" name= 'cancel' value= "Cancel" class="cancel-color">
+    </form>
+</div>
+</div>
+{%endblock%}

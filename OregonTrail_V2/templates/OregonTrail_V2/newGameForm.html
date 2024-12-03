@@ -1,0 +1,29 @@
+{%extends 'OregonTrail_V2/base.html'%}
+
+<!-- TODO: MAKE A FORM TO CREATE THE CHARACTERS -->
+
+<!-- When the game is over we will need to post to the databasee all the game fields and stats
+ on the leaderboards page you can display and filter by the various stats -->
+{%load static%}
+{%block content%}
+
+<link rel="stylesheet" href="{% static 'styles4.css'%}">
+<div class="add-prof">
+<h2 class="page-title">Create a New Game</h2>
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <div class="cancel">
+<input type="submit" name= 'add a game' value="Create a Game">
+
+
+</form>
+<form actiton="{%url 'create_player'%}">
+    <input type="submit" name = "custom" value="Create Custom Player">
+</form>
+<form action="{%url 'base'%}">
+    <input type="submit" name= 'cancel' value= "Cancel" class="cancel-color">
+    </form>
+</div>
+</div>
+{%endblock%}

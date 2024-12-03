@@ -1,4 +1,4 @@
-{%extends 'mini_fb/base.html'%}
+{%extends 'OregonTrail_V2/base.html'%}
 
 {%block content%}
 <h1>Login</h1>
@@ -6,7 +6,13 @@
     {%csrf_token%}
     {{form}}
     <input type="hidden" name="next" value="{%url 'base'%}">
+    <div class="cancel">
+
+    <h1>If you don't have a main site profile, please create one on the main page</h1>
     <input type="submit" value="Login">
+
 </form>
+<h3 class = "fun-times2"><a href="{%url 'create_profile' %}">Create New Profile</a></h3>
+</div>
 
 {%endblock%}

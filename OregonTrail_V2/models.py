@@ -52,7 +52,7 @@ class Season(Enum):
 class Profile(models.Model):
     '''store the information for the player and the relevant information'''
     name = models.TextField(blank=False)
-    age = models.IntegerField(blank=True)
+    age = models.IntegerField(blank=True, null=True)
     currentGame = models.ForeignKey('Game',
                                     null=True,
                                     blank=True, on_delete=models.CASCADE)
@@ -80,7 +80,7 @@ class Game(models.Model):
     # add user field
     # associate game with a user
     active = True #set to true by default
-
+    # profile = models.ForeignKey('Profile', related_name='profileg', on_delete=models.CASCADE)
     player1 = models.ForeignKey('Character', related_name='player1', on_delete=models.CASCADE)
     player2 = models.ForeignKey('Character', related_name='player2',on_delete=models.CASCADE)
     player3 = models.ForeignKey('Character', related_name='player3',on_delete=models.CASCADE)
@@ -97,7 +97,7 @@ class Game(models.Model):
     #     choices=Season.choices1(),
     #     blank=False
     # )
-    currSeasonManager = models.ForeignKey('Season', null=True, blank=True, on_delete=models.CASCADE)
+    season = models.ForeignKey('Season', null=True, blank=True, on_delete=models.CASCADE)
     playersAlive = 5
     dayState = Day.WALKING #default
 
@@ -144,6 +144,12 @@ class Season(models.Model):
     foodPenalty = 0 #added to the food storage to see if harder to get food
     speedPenalty = 0 #slows the player down
 
+    def setDefault(self, season):
+        self.daysLeft = 28 #days before season switches
+        self.healPenalty = 0 # what is the rest day penalty, will be added to rest days and days left
+        self.foodPenalty = 0 #added to the food storage to see if harder to get food
+        self.speedPenalty = 0 #slows the player down
+        self.setCurrentSeason(season)
 
     def setCurrentSeason(self, season):
         '''set the current season'''

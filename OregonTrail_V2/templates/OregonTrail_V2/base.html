@@ -9,9 +9,13 @@
         <nav class="joes-nav">
             <div class = "cont">
             <ul class="nav-links">
-                <li><a href="{%url 'show_all'%}">Home</a></li>
+                <li><a href="{%url 'base'%}">Home</a></li>
                 <!-- want to add link back to profile but not sure how pk is being passed through here -->
-               
+                {%if profile.pk%}
+                <li><a href="{%url 'profile-O' profile.pk%}">User Page</a></li>
+                {%else%}
+                <li><a href="{%url 'profile-O' 3%}">User Page</a></li>
+                {%endif%}
                 {%if request.user.is_authenticated%}
                
                 <form action="{%url 'logout-O' %}" method="POST">
@@ -21,6 +25,10 @@
                 {%else%}
                 <li><a href="{%url 'login-O' %}">Login</a></li>
                 {%endif%}
+                {%if request.user.is_authenticated%}
+                {%else%}
+                <li><a href="{%url 'create_profile-O' %}">Create New Profile</a></li>
+                {%endif%}
                 
                 <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
                 <li><a href="{%url 'about'%}">About</a></li> -->
@@ -28,6 +36,7 @@
         </div>
         </nav>
         <div>
+            
             <!-- <h1 class="page-title">
                 ------------------------------------------------------------------------------------------------------
             </h1> -->
