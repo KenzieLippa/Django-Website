@@ -1,0 +1,22 @@
+{% extends 'OregonTrail_V2/base.html' %}
+{%load static%}
+{%block content%}
+<link rel="stylesheet" href="{%static 'styles4.css'%}">
+<h1 class="feed-title">Are you sure you want to delete this Game?</h1>
+
+{{game.player1.name}}
+<p>
+
+</p>
+<form method="POST">
+    {%csrf_token%}
+
+    <div class="cancel">
+    <input type="submit" name= "yes" value="Yes">
+</form>
+<form method="GET" action="{%url 'profile-O' game.profile.pk%}">
+    {%csrf_token%}
+    <input type="submit" name = "no" value="No">
+</form>
+</div>
+{%endblock%}

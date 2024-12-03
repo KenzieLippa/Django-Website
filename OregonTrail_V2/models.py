@@ -53,9 +53,9 @@ class Profile(models.Model):
     '''store the information for the player and the relevant information'''
     name = models.TextField(blank=False)
     age = models.IntegerField(blank=True, null=True)
-    currentGame = models.ForeignKey('Game',
-                                    null=True,
-                                    blank=True, on_delete=models.CASCADE)
+    # currentGame = models.ForeignKey('Game',
+    #                                 null=True,
+    #                                 blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name = "oregon_profile", on_delete=models.CASCADE)
     bestScore = 0 #will have a setter function for this
 
@@ -63,6 +63,11 @@ class Profile(models.Model):
     def setBestScore(self, score):
         '''set the best score if our new score is better than our last one'''
         self.bestScore = score
+
+    def get_games(self):
+        '''return all games assosciated with this profile'''
+        game = Game.objects.filter(profile = self)
+        return game
 
     def __str__(self):
         return f'{self.name}'
@@ -79,8 +84,9 @@ class Game(models.Model):
 
     # add user field
     # associate game with a user
+
     active = True #set to true by default
-    # profile = models.ForeignKey('Profile', related_name='profileg', on_delete=models.CASCADE)
+    profile = models.ForeignKey('Profile', related_name='profileg', on_delete=models.CASCADE)
     player1 = models.ForeignKey('Character', related_name='player1', on_delete=models.CASCADE)
     player2 = models.ForeignKey('Character', related_name='player2',on_delete=models.CASCADE)
     player3 = models.ForeignKey('Character', related_name='player3',on_delete=models.CASCADE)
@@ -97,7 +103,11 @@ class Game(models.Model):
     #     choices=Season.choices1(),
     #     blank=False
     # )
-    season = models.ForeignKey('Season', null=True, blank=True, on_delete=models.CASCADE)
+    season = models.CharField(
+        max_length=10,
+        choices=Season.choices1(),
+        blank=False
+    )
     playersAlive = 5
     dayState = Day.WALKING #default
 
@@ -124,6 +134,79 @@ class Game(models.Model):
 
     def setScore(self, score):
         self.score = score
+
+    daysLeft = 28 #days before season switches
+    healPenalty = 0 # what is the rest day penalty, will be added to rest days and days left
+    foodPenalty = 0 #added to the food storage to see if harder to get food
+    speedPenalty = 0 #slows the player down
+
+    def setDefault(self, season):
+        self.daysLeft = 28 #days before season switches
+        self.healPenalty = 0 # what is the rest day penalty, will be added to rest days and days left
+        self.foodPenalty = 0 #added to the food storage to see if harder to get food
+        self.speedPenalty = 0 #slows the player down
+        self.setCurrentSeason(season)
+
+    def setCurrentSeason(self, season):
+        '''set the current season'''
+        self.currenSeason = season
+        self.setSeasonStats()
+
+    def incramentSeason(self):
+        '''maybe will refactor later to make less terrible
+        didnt end up being too much code tho'''
+        match(self.currenSeason):
+            case Season.SPRING:
+                self.currenSeason = Season.SUMMER
+            case Season.SUMMER:
+                self.currenSeason = Season.FALL
+            case Season.FALL:
+                self.currenSeason = Season.WINTER
+            case Season.WINTER:
+                self.currenSeason = Season.SPRING
+
+    def setDaysLeft(self, days):
+        self.daysLeft = days
+
+    def setHealPenalty(self, val):
+        self.healPenalty = val
+    def setFoodPenalty(self, food):
+        self.foodPenalty = food
+
+    def setSpeedPenalty(self, speed):
+        self.speedPenalty = speed
+
+    def setSeasonStats(self):
+        match(self.currentSeason):
+            case Season.SPRING:
+                # could have just had it automatically been 28
+                self.setDaysLeft(28) # set back to full
+                self.setHealPenalty = 2
+                self.setFoodPenalty = 1
+                self.setSpeedPenalty = 1
+            case Season.SUMMER:
+                self.setDaysLeft(28) # set back to full
+                self.setHealPenalty = 0
+                self.setFoodPenalty = 0
+                self.setSpeedPenalty = 0
+            case Season.FALL:
+                self.setDaysLeft(28) # set back to full
+                self.setHealPenalty = 3
+                self.setFoodPenalty = 3
+                self.setSpeedPenalty = 2
+            case Season.WINTER:
+                self.setDaysLeft(28) # set back to full
+                self.setHealPenalty = 10
+                self.setFoodPenalty = 10
+                self.setSpeedPenalty = 10
+            
+
+    def progressDay(self):
+        if self.daysLeft > 0:
+            self.daysLeft -= 1
+        else:
+            self.incramentSeason()
+            self.setSeasonStats()
 
     def __str__(self):
         return f'{self.player1}'

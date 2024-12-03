@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{% static 'styles4.css'%}">
 <div class="add-prof">
 <h2 class="page-title">Create a New Game</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {%csrf_token%}
     {{form.as_p}}
     <div class="cancel">

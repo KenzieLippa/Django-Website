@@ -10,4 +10,6 @@ urlpatterns =[
     path('profile/<int:pk>', ShowProfile.as_view(), name='profile-O'),
     path('create_game', Create_Game_View.as_view(), name='create_game'),
     path('create_player', Create_Player_View.as_view(), name='create_player'),
+    path('game/<int:pk>/delete', DeleteGameView.as_view(), name='delete_game',),
+
 ]

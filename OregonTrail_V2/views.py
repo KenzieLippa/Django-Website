@@ -97,15 +97,47 @@ class Create_Game_View(LoginRequiredMixin, CreateView):
     # adding the login mixin to both this and the other
     '''a view to create a new game based on existing players'''
     form_class = CreateGameForm
+    model = Game
     template_name = 'OregonTrail_V2/newGameForm.html'
 
     def get_login_url(self):
         return reverse('login-O')
     
-    def dispatch(self, request, *args, **kwargs):
-        if not Profile.objects.filter(user=request.user).exists():
-            return redirect('create_profile')
-        return super().dispatch(request, *args, **kwargs)
+    
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        '''build the dict of context data for this view'''
+        context = super().get_context_data(**kwargs)
+
+        #find pk from url
+        # pk = self.kwargs['pk']
+
+        # find corresponding profile
+        # profile = Profile.objects.get(pk=pk)
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+
+        #add profile to context data
+        context['profile'] = profile
+        return context
+    
+    def form_valid(self, form):
+        '''handle the form submission and set a foreign key by attaching the profile to the status, can find the profile pk in url'''
+        # profile = Profile.objects.get(pk=self.kwargs['pk'])
+        user = self.request.user
+
+        #use the profile to get the profile corresponding to this user
+        profile = Profile.objects.get(user=user)
+        form.instance.profile = profile
+        #save the status msg to the db
+        form.save()
+
+        #read the file from the form
+        
+
+        return super().form_valid(form)
     # def get_object(self):
     # # get logged in user
     #     # maybe add an if pk but idk
@@ -122,35 +154,14 @@ class Create_Game_View(LoginRequiredMixin, CreateView):
     
 
     def get_success_url(self) -> str:
-        '''redirect the url after successfully submitting form'''
-        return reverse('base')
+        '''return a url to redirect to after successfully submitting form'''
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        print(profile.pk)
+        return reverse('profile-O', kwargs={'pk':profile.pk})
+    
     # TODO make this the main game screen
     
-    def form_valid(self, form):
-        '''handle the form submission and get the foreign key?'''
-        # profile = Profile.objects.get(pk=self.kwargs['pk'])
-        # form.instance.profile = profile
-        print(f'CreateGameView: form.cleaned_data={form.cleaned_data}')
-        # profile = Profile.objects.get(pk=self.kwargs['pk'])
-        user = self.request.user
-
-        #use the profile to get the profile corresponding to this user
-        # profile = Profile.objects.get_or_create(user=user)
-        # form.instance.profile = profile
-        #save the status msg to the db
-        sm = form.save()
-
-        #read the file from the form
-        # files = self.request.FILES.getlist('files')
-        # for img in files:
-        #     #create image object
-        #     new_img = Image()
-        #     new_img.image = img
-        #     # hopefully this works lol
-        #     new_img.status_msg = sm
-        #     new_img.save()
-
-        return super().form_valid(form)
     
 
 class Create_Player_View(CreateView):
@@ -199,3 +210,24 @@ class Create_Player_View(CreateView):
         #     # add user form to the context
         #     context['user_game_form'] = UserCreationForm()
         #     return context
+
+class DeleteGameView(LoginRequiredMixin, DeleteView):
+    '''a view to delete our status messages'''
+    template_name = "OregonTrail_V2/delete_game.html"
+    model = Game
+    context_object_name = 'game'
+
+    def get_login_url(self):
+        return reverse('login')
+
+    def get_success_url(self):
+        '''return the url to redirect to when we've completed'''
+
+        #get the pk
+        pk= self.kwargs.get('pk')
+        game = Game.objects.filter(pk=pk).first()
+
+        #find the profile
+        profile = game.profile
+
+        return reverse('profile-O', kwargs={'pk':profile.pk})

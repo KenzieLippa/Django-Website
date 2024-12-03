@@ -15,7 +15,30 @@
         <h2 class="page-title">{{profile.name}}</h2>
        
     </div>
+
+
 </div>
+<h2 class="stat-title">Game Collection:</h2>
+<!-- {%if request.user == profile.user%} -->
+<button class="stat-title"> <a href="{%url 'create_game' %}">Create a New Game</a></button>
+<button><a href="{%url 'create_player'}"></a>Create a new Player</button>
+<!-- {%else%} -->
+<!-- <h3 class="must-login">You can only post from your own page</h3>
+{%endif%} -->
+<!-- <button class="stat-title"> {{profile.add_friend}}Add a Friend</button> -->
+<!-- {{profile.get_stat_msg}} -->
+{%for p in profile.get_games%}
+<div class="stat-msg">
+    
+    <!-- <div class="stat-msg-text"> -->
+    <p>Active: {{p.active}}</p>
+    <p>Miles Traveled: {{p.miles}}</p>
+    <p>Current Day: {{p.days}}</p>
+    <p>Current Season: {{p.season}}</p>
+    <p>Player 1: {{p.player1.name}}</p>
+    <button><a href="{%url 'update_status' p.pk%}">Play</a></button>
+     <button><a href="{%url 'delete_game' p.pk%}">Delete</a></button>
 
-
+{%endfor%}
+</div>
 {%endblock%}
