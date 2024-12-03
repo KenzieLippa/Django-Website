@@ -79,7 +79,7 @@ class Game(models.Model):
 
     # add user field
     # associate game with a user
-   
+    active = True #set to true by default
 
     player1 = models.ForeignKey('Character', related_name='player1', on_delete=models.CASCADE)
     player2 = models.ForeignKey('Character', related_name='player2',on_delete=models.CASCADE)
@@ -511,3 +511,19 @@ class Dialogue(models.Model):
     # TODO decide if i want to read in json files for this
     def __str__(self):
         return self.text
+
+# TODO: FIX LATER
+# class GameStats(models.Model):
+#     # probably will have these populated automatically when the game is over but will send a json or text post to the backend
+#     deathSeason = models.CharField(
+#         max_length=10,
+#         choices=Season.choices1(),
+#         blank=False
+#     )
+#     daysLived = models.IntegerField
+#     milesTraveled = models.IntegerField
+#     illnessesObtained = models.IntegerField
+#     strangersTrusted = models.IntegerField
+#     moneyLeft = models.IntegerField
+#     foodLeft = models.IntegerField
+#     game = models.ForeignKey("Game", on_delete=models.CASCADE)
