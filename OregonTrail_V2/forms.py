@@ -24,3 +24,10 @@ class CreatePlayerForm(forms.ModelForm):
         '''associate this with the profile form'''
         model = Character
         fields = ["name", "adult", "gender"]
+
+
+# class UpdateGameForm(forms.ModelForm):
+#     '''add a form to update the existing profile'''
+#     class Meta:
+#         model = Game
+#         fields = ['miles']

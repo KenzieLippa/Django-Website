@@ -94,7 +94,7 @@ class Game(models.Model):
     player5 = models.ForeignKey('Character', related_name='player5',on_delete=models.CASCADE)
 
     party = [player1, player2, player3, player4, player5]
-    miles = 0 #how many miles has the player gone
+    miles = models.IntegerField(default=0) #how many miles has the player gone
     days = 0
     # will be figured out later as different seasons will have different properties,
     #probably will make seasons their own model

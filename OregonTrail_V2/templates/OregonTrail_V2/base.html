@@ -13,6 +13,8 @@
                 <!-- want to add link back to profile but not sure how pk is being passed through here -->
                 {%if profile.pk%}
                 <li><a href="{%url 'profile-O' profile.pk%}">User Page</a></li>
+                {%elif game.profile.pk%}
+                <li><a href="{%url 'profile-O' game.profile.pk%}">User Page</a></li>
                 {%else%}
                 <li><a href="{%url 'profile-O' 3%}">User Page</a></li>
                 {%endif%}

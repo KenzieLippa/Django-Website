@@ -13,7 +13,9 @@ from .models import *
 from django.dispatch import receiver
 from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import redirect, get_object_or_404
-
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 # # make sure the user has a profile for this part of the website
 # @receiver(user_logged_in)
 # def ensure_profile(sender, request, user, **kwargs):
@@ -231,3 +233,58 @@ class DeleteGameView(LoginRequiredMixin, DeleteView):
         profile = game.profile
 
         return reverse('profile-O', kwargs={'pk':profile.pk})
+    
+
+class GameDetailView(DetailView):
+    '''a view to populate the fields for the game, hopefully everything will work smoothly'''
+
+    model = Game
+    template_name = "OregonTrail_V2/game.html"
+    context_object_name = 'game'
+
+# 
+# @csrf_exempt
+def update_game(req, game_id):
+    if req.method == "POST":
+
+        try:
+            data = json.loads(req.body)
+            miles = data.get("miles")
+            print(miles) #program is able to get the miles
+            game = Game.objects.get(pk = game_id)
+            # print(game.pk)
+            game.miles = int(miles)
+            game.save()
+            print(f"after update:{game.miles}")
+            gameR = Game.objects.get(pk=game_id)
+            print(f"but really its: {gameR.miles}")
+            return JsonResponse({"success": True}, status=200)
+        except Game.DoesNotExist:
+            return JsonResponse({"success":False, "error":"Game not found"})
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)})
+    return JsonResponse({"success": False, "error": "Invalid Response"}) 
+
+
+# class UpdateStatusMessageView(UpdateView):
+#     '''update our game with information when we hit the save button, this way we can keep track of our stats'''
+#     form_class = UpdateGameForm
+#     template_name = "mini_fb/update_status_form.html" # TODO fix this to go to our main form
+#     model = Game
+#     context_object_name = "status_msg"
+
+#     def form_valid(self, form):
+#         return super().form_valid(form)
+    
+    
+#     def get_success_url(self):
+#         '''return the url to redirect to when we've completed'''
+
+#         #get the pk
+#         pk= self.kwargs.get('pk')
+#         game = Game.objects.filter(pk=pk).first()
+
+#         #find the profile
+#         profile = game.profile
+
+#         return reverse('profile', kwargs={'pk':profile.pk})
