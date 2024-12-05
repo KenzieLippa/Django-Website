@@ -19,6 +19,20 @@ console.log(player1)
     const forest_background = "{%static 'OregonFiles/assets/ForestBackground.png'%}";
     const forest_foreground = "{%static 'OregonFiles/assets/ForestForeground.PNG'%}";
 
+    //loading in the people sprites
+    const MaleIdle = "{%static 'OregonFiles/assets/MaleIdle.PNG'%}";
+    const MaleWalk = "{%static 'OregonFiles/assets/MaleWalk.PNG'%}";
+    const FemaleIdle = "{%static 'OregonFiles/assets/FemaleIdle.PNG'%}";
+    const FemaleWalk = "{%static 'OregonFiles/assets/FemaleWalk.PNG'%}";
+
+    //loading in menus and dialogue boxes
+    const DialogueBox = "{%static 'OregonFiles/assets/DialogueBox.PNG'%}";
+    const MoneyMiles = "{%static 'OregonFiles/assets/MoneyMiles.PNG'%}";
+    const WagonFoodBar = "{%static 'OregonFiles/assets/WagonFoodBar.PNG'%}";
+
+    //wagon and ox
+    const Oxen = "{%static 'OregonFiles/assets/Oxen.PNG'%}";
+    const Wagon = "{%static 'OregonFiles/assets/Wagon.PNG'%}";
 
  </script>
  <div style = "position: relative; text-align: center;">
@@ -31,6 +45,9 @@ console.log(player1)
         <p style="color:white;">Miles Traveled: <span id = "miles-display" > {{game.miles}}</span></p>
         <button id="saveButton">Save Miles</button>
     </div>
+    <script src="{%static 'OregonFiles/scripts/modelFuncs.js'%}"></script>
+    <script src="{%static 'OregonFiles/scripts/character.js'%}"></script>
+    <script src="{%static 'OregonFiles/scripts/utils.js'%}"></script>
     <script src="{%static 'OregonFiles/scripts/parallax.js'%}"></script>
 </div>
 </body>

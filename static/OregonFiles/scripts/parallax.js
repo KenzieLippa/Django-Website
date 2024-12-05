@@ -6,6 +6,11 @@ let gamePaused = false
 let parallax;
 let miles = gameMiles
 const mile = 5280
+const FR = 20
+let offsetX = 200
+//for if we end up wanting to actually not hard code things
+const kidX = 525
+const adultX = 400
 
 let step = 0;
 let gameId = game_id
@@ -13,6 +18,183 @@ let gameId = game_id
 //canvas size
 canvas.width = 1710
 canvas.height = 900
+
+const ox = new Sprite({
+    position:{
+        x:850 + offsetX,
+        y:430
+    },
+    imageSrc: Oxen,
+    scale: 1,
+    framesMax: 1,
+
+})
+
+const wagon = new Sprite({
+    position:{
+        x:1050 + offsetX,
+        y:400
+    },
+    imageSrc: Wagon,
+    scale: 1,
+    framesMax: 1,
+
+})
+const player1J = new Character({
+    position: {
+    x : 700 + offsetX,
+    y: 400
+    },
+    
+    offset:{
+        x: 0,
+        y: 0,
+    },
+    imageSrc: MaleWalk,
+    //set our max frames
+    framesMax: 16,
+    scale: 1,
+    name: "Chad",
+    adult: true,
+    gender: Gender.MALE,
+
+    sprites:{
+        idle:{
+            imageSrc: MaleIdle,
+            framesMax: 1,
+        },
+        run:{
+            imageSrc: MaleWalk,
+            framesMax: 16,
+        },
+    
+    },
+    
+});
+const player2J = new Character({
+    position: {
+    x : 900 + offsetX,
+    y: 400
+    },
+    
+    offset:{
+        x: 0,
+        y: 0,
+    },
+    imageSrc: FemaleWalk,
+    //set our max frames
+    framesMax: 16,
+    scale: 1,
+    name: "Fema",
+    adult: true,
+    gender: Gender.FEMALE,
+
+    sprites:{
+        idle:{
+            imageSrc: FemaleIdle,
+            framesMax: 1,
+        },
+        run:{
+            imageSrc: FemaleWalk,
+            framesMax: 16,
+        },
+    
+    },
+    
+});
+const player3J = new Character({
+    position: {
+    x : 1100 + offsetX,
+    y: 525
+    },
+    
+    offset:{
+        x: 0,
+        y: 0,
+    },
+    imageSrc: FemaleWalk,
+    //set our max frames
+    framesMax: 16,
+    scale: 0.5,
+    name: "Mingus",
+    adult: false,
+    gender: Gender.FEMALE,
+
+    sprites:{
+        idle:{
+            imageSrc: FemaleIdle,
+            framesMax: 1,
+        },
+        run:{
+            imageSrc: FemaleWalk,
+            framesMax: 16,
+        },
+    
+    },
+    
+});
+const player4J = new Character({
+    position: {
+    x : 1200 + offsetX,
+    y: 525
+    },
+    
+    offset:{
+        x: 0,
+        y: 0,
+    },
+    imageSrc: MaleWalk,
+    //set our max frames
+    framesMax: 16,
+    scale: 0.5,
+    name: "RayRay",
+    adult: false,
+    gender: Gender.MALE,
+
+    sprites:{
+        idle:{
+            imageSrc: MaleIdle,
+            framesMax: 1,
+        },
+        run:{
+            imageSrc: MaleWalk,
+            framesMax: 16,
+        },
+    
+    },
+    
+});
+const player5J = new Character({
+    position: {
+    x : 1300 + offsetX,
+    y: 525
+    },
+    
+    offset:{
+        x: 0,
+        y: 0,
+    },
+    imageSrc: MaleWalk,
+    //set our max frames
+    framesMax: 16,
+    scale: 0.5,
+    name: "Boo Jenkins",
+    adult: false,
+    gender: Gender.MALE,
+
+    sprites:{
+        idle:{
+            imageSrc: MaleIdle,
+            framesMax: 1,
+        },
+        run:{
+            imageSrc: MaleWalk,
+            framesMax: 16,
+        },
+    
+    },
+    
+});
 
 //layers for the background
 const layers = [
@@ -49,6 +231,15 @@ function animate(){
         //update the offset
         offsets[index] = (offset + speed- canvas.width) % canvas.width;
         step ++;
+        wagon.update()
+        ox.update()
+        c.fillStyle = 'rgba(255,255,255,0.15)'
+        c.fillRect(0,0,canvas.width,canvas.height)
+        player1J.update()
+        player2J.update()
+        player3J.update()
+        player4J.update()
+        player5J.update()
         if (step % mile ===0){
             miles++
             document.getElementById('miles-display').innerHTML = miles
@@ -63,8 +254,12 @@ function togglePause(){
     const button = document.getElementById('pauseBtn')
     button.textContent = gamePaused ? 'Run': "Stop";
     //console.log("pause")
-    if (!gamePaused) animate()
+    if (!gamePaused) {
+        player1J.switchSprite('run')
+        animate()
+    }
     else{
+        player1J.switchSprite('idle')
         cancelAnimationFrame(parallax)
     }
 }
