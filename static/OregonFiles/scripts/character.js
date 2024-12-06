@@ -115,7 +115,7 @@ class Character extends Sprite{
         //could try to refactor later
         this.frameCurr = 0
         this.framesElapsed = 0
-        this.framesHold = 50
+        this.framesHold = 15
         this.sprites = sprites
         this.dead = dead
 

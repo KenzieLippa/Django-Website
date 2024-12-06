@@ -5,12 +5,97 @@
     
 
 <script>
-const player1 = "{{game.player1.name}}";
+//saved game variables
 const gameMiles = "{{game.miles}}";
 const game_id = "{{game.pk}}";
-console.log(player1)
-</script>
 
+
+//saved player variables
+//player1
+const p1_name = "{{game.player1.name}}"
+const p1_adult = "{{game.player1.adult}}";
+const p1_gender = "{{game.player1.gender}}";
+const p1_dead = "{{game.player1.dead}}";
+const p1_currIJ = "{{game.player1.currentInjury}}";
+const p1_injury_chance = "{{game.player1.injuryChance}}";
+const p1_hunger = "{{game.player1.hunger}}";
+const p1_healthLoss = "{{game.player1.healthLoss}}";
+const p1_restDaysNeeded = "{{game.player1.restDaysNeeded}}";
+const p1_treated = "{{game.player1.treated}}";
+const p1_slowHeal = "{{game.player1.slowHeal}}";
+const p1_deathChance = "{{game.player1.deathChance}}";
+const p1_infected = "{{game.player1.infected}}";
+const p1_stomach = "{{game.player1.stomach}}";
+
+//player2
+const p2_name = "{{game.player2.name}}"
+const p2_adult = "{{game.player2.adult}}";
+const p2_gender = "{{game.player2.gender}}";
+const p2_dead = "{{game.player2.dead}}";
+const p2_currIJ = "{{game.player2.currentInjury}}";
+const p2_injury_chance = "{{game.player2.injuryChance}}";
+const p2_hunger = "{{game.player2.hunger}}";
+const p2_healthLoss = "{{game.player2.healthLoss}}";
+const p2_restDaysNeeded = "{{game.player2.restDaysNeeded}}";
+const p2_treated = "{{game.player2.treated}}";
+const p2_slowHeal = "{{game.player2.slowHeal}}";
+const p2_deathChance = "{{game.player2.deathChance}}";
+const p2_infected = "{{game.player2.infected}}";
+const p2_stomach = "{{game.player2.stomach}}";
+
+//player3
+const p3_name = "{{game.player3.name}}"
+const p3_adult = "{{game.player3.adult}}";
+const p3_gender = "{{game.player3.gender}}";
+const p3_dead = "{{game.player3.dead}}";
+const p3_currIJ = "{{game.player3.currentInjury}}";
+const p3_injury_chance = "{{game.player3.injuryChance}}";
+const p3_hunger = "{{game.player3.hunger}}";
+const p3_healthLoss = "{{game.player3.healthLoss}}";
+const p3_restDaysNeeded = "{{game.player3.restDaysNeeded}}";
+const p3_treated = "{{game.player3.treated}}";
+const p3_slowHeal = "{{game.player3.slowHeal}}";
+const p3_deathChance = "{{game.player3.deathChance}}";
+const p3_infected = "{{game.player3.infected}}";
+const p3_stomach = "{{game.player3.stomach}}";
+
+//player4
+const p4_name = "{{game.player4.name}}"
+const p4_adult = "{{game.player4.adult}}";
+const p4_gender = "{{game.player4.gender}}";
+const p4_dead = "{{game.player4.dead}}";
+const p4_currIJ = "{{game.player4.currentInjury}}";
+const p4_injury_chance = "{{game.player4.injuryChance}}";
+const p4_hunger = "{{game.player4.hunger}}";
+const p4_healthLoss = "{{game.player4.healthLoss}}";
+const p4_restDaysNeeded = "{{game.player4.restDaysNeeded}}";
+const p4_treated = "{{game.player4.treated}}";
+const p4_slowHeal = "{{game.player4.slowHeal}}";
+const p4_deathChance = "{{game.player4.deathChance}}";
+const p4_infected = "{{game.player4.infected}}";
+const p4_stomach = "{{game.player4.stomach}}";
+
+
+//player5
+const p5_name = "{{game.player5.name}}"
+const p5_adult = "{{game.player5.adult}}";
+const p5_gender = "{{game.player5.gender}}";
+const p5_dead = "{{game.player5.dead}}";
+const p5_currIJ = "{{game.player5.currentInjury}}";
+const p5_injury_chance = "{{game.player5.injuryChance}}";
+const p5_hunger = "{{game.player5.hunger}}";
+const p5_healthLoss = "{{game.player5.healthLoss}}";
+const p5_restDaysNeeded = "{{game.player5.restDaysNeeded}}";
+const p5_treated = "{{game.player5.treated}}";
+const p5_slowHeal = "{{game.player5.slowHeal}}";
+const p5_deathChance = "{{game.player5.deathChance}}";
+const p5_infected = "{{game.player5.infected}}";
+const p5_stomach = "{{game.player5.stomach}}";
+
+
+//console.log(player1)
+</script>
+<!-- <h1 class="page-title">{{game.player1.gender}}</h1> -->
 <script>
    
     // stuff for my background 
@@ -34,15 +119,69 @@ console.log(player1)
     const Oxen = "{%static 'OregonFiles/assets/Oxen.PNG'%}";
     const Wagon = "{%static 'OregonFiles/assets/Wagon.PNG'%}";
 
+
+    //variables from the backend
+
+
  </script>
+ <style>
+    .bar-container{
+        position: absolute;
+        top: 110.25px;
+        left: 168px;
+        transform: translate(-50%, -50%);
+        width: 112px;
+        height: 25px;
+        border: 1px solid #000;
+        background-color: #95e7b2;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .bar-wagon{
+        height: 100%;
+        width: 0%;
+        background-color: #4caf50;
+        transition: width 0.1s linear;
+    }
+    .bar-container2{
+        position: absolute;
+        top: 222.25px;
+        left: 184px;
+        transform: translate(-50%, -50%);
+        width: 99px;
+        height: 25px;
+        border: 1px solid #000;
+        background-color: #95e7b2;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .bar-food{
+        height: 100%;
+        width: 0%;
+        background-color: #4caf50;
+        transition: width 0.1s linear;
+    }
+ </style>
  <div style = "position: relative; text-align: center;">
  <canvas class="parallaxCanvas" style="display:block;">
  </canvas>
+ <!-- <div > -->
+ <p style="color:white; position: absolute; top: 100px; right:55px; transform: translateX(-50%); font-size: 14px;;"><span id = "miles-display" > {{game.miles}} M</span></p>
+ <p style="color:white; position: absolute; top: 210px; right:90px; transform: translateX(-50%); font-size: 16px;"><span id = "money-display" > 100</span></p>
+<!-- </div> -->
+ <div class="bar-container">
+    <div class="bar-wagon"></div>
+ </div>
+ <div class="bar-container2">
+    <div class="bar-food"></div>
+ </div>
  <button id="pauseBtn" style="position: absolute; bottom: 80px; left:30%; transform: translateX(-50%);">
      Stop
     </button>
     <div style="position:absolute; bottom: 80px; left:70%; transform: translateX(-50%);">
-        <p style="color:white;">Miles Traveled: <span id = "miles-display" > {{game.miles}}</span></p>
+        
         <button id="saveButton">Save Miles</button>
     </div>
     <script src="{%static 'OregonFiles/scripts/modelFuncs.js'%}"></script>

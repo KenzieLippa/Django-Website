@@ -18,7 +18,75 @@ let gameId = game_id
 //canvas size
 canvas.width = 1710
 canvas.height = 900
+console.log(p1_currIJ)
+let kidY = 125
+// if(p1_currIJ === "IJ.NONE"){
+//     console.log("true") //is true passes in as a string instead of an enum
+// }
+console.log(p1_adult)
+//adult is a string
 
+// if(p1_adult=== true){
+//     print("is not a string")
+// }
+
+function getPythonBool(val){
+    switch(val){
+        case "True":
+           // kidY=0
+            return true
+        case "False":
+          //  kidY=125
+            return false
+    }
+}
+function getAdult(val){
+    switch(val){
+        case "True":
+           // kidY=0
+            return {adult: true, y:0, scale: 1}
+        case "False":
+          //  kidY=125
+            return {adult:false, y:125, scale: 0.5}
+    }
+}
+
+function getPythonIJ(val){
+    switch(val){
+        case "IJ.NONE":
+            return IJ.NONE
+        case "IJ.DYSENTERY":
+            return IJ.DYSENTERY
+        case "IJ.CHOLERA":
+            return IJ.CHOLERA
+        case "IJ.BROKEN_ARM":
+            return IJ.BROKEN_ARM
+        case "IJ.BROKEN_LEG":
+            return IJ.BROKEN_LEG
+        case "IJ.SNAKE_BITE":
+            return IJ.SNAKE_BITE
+        case "IJ.POISONED":
+            return IJ.POSIONED
+    }
+}
+console.log(p1_gender)
+if(p1_gender)
+function getGender(val){
+    switch(val){
+        case "MALE":
+            return {gender:Gender.MALE, idle: MaleIdle, run: MaleWalk}
+        case "FEMALE":
+            return {gender: Gender.FEMALE, idle: FemaleIdle, run: FemaleWalk}
+        default:
+            console.log("No genders were detected")
+    }
+}
+console.log(getPythonBool(p1_adult))
+
+//parse the data 
+// if(p1_currIJ ==IJ.NONE){
+//     console.log("Also True")
+// }
 const ox = new Sprite({
     position:{
         x:850 + offsetX,
@@ -40,62 +108,112 @@ const wagon = new Sprite({
     framesMax: 1,
 
 })
+const MoneyMilesSpr = new Sprite({
+    position:{
+        x: window.innerWidth - 256,
+        y:50
+    },
+    imageSrc: MoneyMiles,
+    scale: 1,
+    framesMax: 1,
+
+})
+
+
+const WagonFood= new Sprite({
+    position:{
+        x: 0,
+        y:50
+    },
+    imageSrc: WagonFoodBar,
+    scale: 1,
+    framesMax: 1,
+
+})
+
+const py1_gender = getGender(p1_gender)
+const py2_gender = getGender(p2_gender)
+const py3_gender = getGender(p3_gender)
+const py4_gender = getGender(p4_gender)
+const py5_gender = getGender(p5_gender)
+
+const py1_adult = getAdult(p1_adult)
+const py2_adult = getAdult(p2_adult)
+const py3_adult = getAdult(p3_adult)
+const py4_adult = getAdult(p4_adult)
+const py5_adult = getAdult(p5_adult)
+
+
+console.log(py1_gender)
+// function getScale(val){
+//     if(val){
+//         return 1
+//     }
+//     else{
+//         return 0.5
+//     }
+// }
+
+
 const player1J = new Character({
     position: {
-    x : 700 + offsetX,
-    y: 400
+    x : window.innerWidth/6 *3 + 40,
+    y: 400 + py1_adult.y
     },
     
     offset:{
         x: 0,
         y: 0,
     },
-    imageSrc: MaleWalk,
+    imageSrc: py1_gender.run,
     //set our max frames
     framesMax: 16,
-    scale: 1,
-    name: "Chad",
-    adult: true,
-    gender: Gender.MALE,
+    scale: py1_adult.scale,
+    name: p1_name,
+    //name:"chad",
+    adult: py1_adult.adult,
+    gender: py1_gender.gender,
+
 
     sprites:{
         idle:{
-            imageSrc: MaleIdle,
+            imageSrc: py1_gender.idle,
             framesMax: 1,
         },
         run:{
-            imageSrc: MaleWalk,
+            imageSrc: py1_gender.run,
             framesMax: 16,
         },
     
     },
     
 });
+console.log("p1 fine")
 const player2J = new Character({
     position: {
     x : 900 + offsetX,
-    y: 400
+    y: 400 + py2_adult.y
     },
     
     offset:{
         x: 0,
         y: 0,
     },
-    imageSrc: FemaleWalk,
+    imageSrc: py2_gender.run,
     //set our max frames
     framesMax: 16,
-    scale: 1,
-    name: "Fema",
-    adult: true,
-    gender: Gender.FEMALE,
+    scale: py2_adult.scale,
+    name: p2_name,
+    adult: py2_adult.adult,
+    gender: py2_gender.gender,
 
     sprites:{
         idle:{
-            imageSrc: FemaleIdle,
+            imageSrc: py2_gender.idle,
             framesMax: 1,
         },
         run:{
-            imageSrc: FemaleWalk,
+            imageSrc: py2_gender.run,
             framesMax: 16,
         },
     
@@ -105,28 +223,28 @@ const player2J = new Character({
 const player3J = new Character({
     position: {
     x : 1100 + offsetX,
-    y: 525
+    y: 400+ py3_adult.y
     },
     
     offset:{
         x: 0,
         y: 0,
     },
-    imageSrc: FemaleWalk,
+    imageSrc: py3_gender.run,
     //set our max frames
     framesMax: 16,
-    scale: 0.5,
-    name: "Mingus",
-    adult: false,
-    gender: Gender.FEMALE,
+    scale: py3_adult.scale,
+    name: p3_name,
+    adult: py3_adult.adult,
+    gender: py3_gender.gender,
 
     sprites:{
         idle:{
-            imageSrc: FemaleIdle,
+            imageSrc: py3_gender.idle,
             framesMax: 1,
         },
         run:{
-            imageSrc: FemaleWalk,
+            imageSrc: py3_gender.run,
             framesMax: 16,
         },
     
@@ -136,28 +254,28 @@ const player3J = new Character({
 const player4J = new Character({
     position: {
     x : 1200 + offsetX,
-    y: 525
+    y: 400 + py4_adult.y
     },
     
     offset:{
         x: 0,
         y: 0,
     },
-    imageSrc: MaleWalk,
+    imageSrc: py4_gender.run,
     //set our max frames
     framesMax: 16,
-    scale: 0.5,
-    name: "RayRay",
-    adult: false,
-    gender: Gender.MALE,
+    scale: py4_adult.scale,
+    name: p4_name,
+    adult: py4_adult.adult,
+    gender: py4_gender.gender,
 
     sprites:{
         idle:{
-            imageSrc: MaleIdle,
+            imageSrc: py4_gender.idle,
             framesMax: 1,
         },
         run:{
-            imageSrc: MaleWalk,
+            imageSrc: py4_gender.run,
             framesMax: 16,
         },
     
@@ -167,34 +285,40 @@ const player4J = new Character({
 const player5J = new Character({
     position: {
     x : 1300 + offsetX,
-    y: 525
+    y: 400 + py5_adult.y
     },
     
     offset:{
         x: 0,
         y: 0,
     },
-    imageSrc: MaleWalk,
+    imageSrc: py5_gender.run,
     //set our max frames
     framesMax: 16,
-    scale: 0.5,
-    name: "Boo Jenkins",
-    adult: false,
-    gender: Gender.MALE,
+    scale: py5_adult.scale,
+    name: p5_name,
+    adult: py5_adult.adult,
+    gender: py5_gender.gender,
 
     sprites:{
         idle:{
-            imageSrc: MaleIdle,
+            imageSrc: py5_gender.idle,
             framesMax: 1,
         },
         run:{
-            imageSrc: MaleWalk,
+            imageSrc: py5_gender.run,
             framesMax: 16,
         },
     
     },
     
 });
+console.log("p5 fine")
+window.addEventListener('resize', ()=>{
+    MoneyMilesSpr.position.x = window.innerWidth -256
+    player1J.position.x = window.innerWidth/6 *3 + 40
+    //reset when resized
+})
 
 //layers for the background
 const layers = [
@@ -218,34 +342,39 @@ layers.forEach((layer, index) =>{
 //animate the background
 function animate(){
     c.clearRect(0,0, canvas.width, canvas.height)
+    if(!gamePaused){
 
-    layers.forEach((layer, index)=>{
-        const img = images[index];
-        const speed = layer.speed;
-        const offset = offsets[index]
-
-        //draw two copies for the wraparound effect
-        c.drawImage(img, offset, 0, canvas.width, canvas.height)
-        c.drawImage(img, canvas.width + offset, 0, canvas.width, canvas.height)
-
-        //update the offset
-        offsets[index] = (offset + speed- canvas.width) % canvas.width;
-        step ++;
-        wagon.update()
-        ox.update()
-        c.fillStyle = 'rgba(255,255,255,0.15)'
-        c.fillRect(0,0,canvas.width,canvas.height)
-        player1J.update()
-        player2J.update()
-        player3J.update()
-        player4J.update()
-        player5J.update()
-        if (step % mile ===0){
-            miles++
-            document.getElementById('miles-display').innerHTML = miles
-            console.log(miles)
-        }
-    })
+        layers.forEach((layer, index)=>{
+            const img = images[index];
+            const speed = layer.speed;
+            const offset = offsets[index]
+            
+            //draw two copies for the wraparound effect
+            c.drawImage(img, offset, 0, canvas.width, canvas.height)
+            c.drawImage(img, canvas.width + offset, 0, canvas.width, canvas.height)
+            
+            //update the offset
+            offsets[index] = (offset + speed- canvas.width) % canvas.width;
+            step ++;
+            if (step % mile ===0){
+                miles++
+                document.getElementById('miles-display').innerHTML = miles +" M"
+                console.log(miles)
+            }
+        })
+    }
+        
+    wagon.update()
+    ox.update()
+    c.fillStyle = 'rgba(255,255,255,0.15)'
+    c.fillRect(0,0,canvas.width,canvas.height)
+    player1J.update()
+    player2J.update()
+    player3J.update()
+    player4J.update()
+    player5J.update()
+    MoneyMilesSpr.update()
+    WagonFood.update()
     parallax = requestAnimationFrame(animate);
 }
 function togglePause(){
@@ -254,6 +383,7 @@ function togglePause(){
     const button = document.getElementById('pauseBtn')
     button.textContent = gamePaused ? 'Run': "Stop";
     //console.log("pause")
+    //animate()
     if (!gamePaused) {
         player1J.switchSprite('run')
         animate()
