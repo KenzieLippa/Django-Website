@@ -402,9 +402,10 @@ function togglePause(){
 //call the toggle pause when we have finished
 document.getElementById('pauseBtn').addEventListener('click', togglePause);
 //make sure we are loaded in before we animate
-Promise.all(images.map(img => new Promise(resolve => img.onload = resolve))).then(()=>{
-    animate()
-});
+// Promise.all(images.map(img => new Promise(resolve => img.onload = resolve))).then(()=>{
+//     animate()
+// });
+animate()
 
 function update_miles(){
     
