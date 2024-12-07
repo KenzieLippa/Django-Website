@@ -27,6 +27,7 @@ def base(req):
     '''show the main page'''
     template_name = "OregonTrail_V2/home.html"
     profile = None
+    boo = None
     if req.user.is_authenticated:
         profile = get_object_or_404(Profile, user=req.user)
         boo =req.session['profile_pk'] = profile.pk
