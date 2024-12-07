@@ -14,6 +14,11 @@ const adultX = 400
 
 let step = 0;
 let gameId = game_id
+let food = 100
+
+gsap.to('#food', {
+    width: food + '%'
+})
 //fill the window but may need to fix with the nav bar
 //canvas size
 canvas.width = 1710
@@ -313,7 +318,9 @@ const player5J = new Character({
     },
     
 });
+
 console.log("p5 fine")
+const party = [player1J, player2J, player3J, player4J, player5J]
 window.addEventListener('resize', ()=>{
     MoneyMilesSpr.position.x = window.innerWidth -256
     player1J.position.x = window.innerWidth/6 *3 + 40
@@ -360,6 +367,24 @@ function animate(){
                 miles++
                 document.getElementById('miles-display').innerHTML = miles +" M"
                 console.log(miles)
+                for(let i = 0; i < party.length; i++){
+                    if(!party[i].dead){
+            
+                        party[i].eat()
+                      //  console.log(party[i].stomach)
+                    //    if(party[i].getStomach() < 50){
+                            if (food >0){
+                                food -= 5 //subtract 1 from food
+                                party[i].setStomach(100)
+                                gsap.to('#food', {
+                                    width: food + '%'
+                                })
+                            }
+                            console.log("ABOUT TO CALL HURT food is: " + food)
+                            party[i].hurt()
+                        // }
+                    }
+                }
             }
         })
     }
@@ -368,11 +393,18 @@ function animate(){
     ox.update()
     c.fillStyle = 'rgba(255,255,255,0.15)'
     c.fillRect(0,0,canvas.width,canvas.height)
-    player1J.update()
-    player2J.update()
-    player3J.update()
-    player4J.update()
-    player5J.update()
+    for(let i = 0; i < party.length; i++){
+        if(!party[i].dead){
+
+            party[i].update()
+        }
+    }
+   
+    // player1J.update()
+    // player2J.update()
+    // player3J.update()
+    // player4J.update()
+    // player5J.update()
     MoneyMilesSpr.update()
     WagonFood.update()
     parallax = requestAnimationFrame(animate);

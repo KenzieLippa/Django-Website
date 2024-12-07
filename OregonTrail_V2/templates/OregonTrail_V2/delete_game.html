@@ -2,6 +2,7 @@
 {%load static%}
 {%block content%}
 <link rel="stylesheet" href="{%static 'styles4.css'%}">
+<div class="page-contents">
 <h1 class="feed-title">Are you sure you want to delete this Game?</h1>
 
 {{game.player1.name}}
@@ -18,5 +19,6 @@
     {%csrf_token%}
     <input type="submit" name = "no" value="No">
 </form>
+</div>
 </div>
 {%endblock%}

@@ -1,14 +1,16 @@
 {%extends 'OregonTrail_V2/base.html'%}
 {%block content%}
+<div class="page-contents">
 <h1 class = "page-title" style=" margin-left: 32%; margin-bottom: 20%;">Oregon Trail</h1>
-<h3 class = "fun-times" style="margin-left:35%"><a href="{%url 'create_game' %}">Create New Game</a></h3>
+<h3 class = "fun-times" style="margin-left:42%"><a href="{%url 'create_game' %}">Create New Game</a></h3>
 
 {%if profile.pk%}
 <h3 class="fun-times" ><a href="{%url 'profile-O' profile.pk%}">Continue</a></h3>
 {%elif game.profile.pk%}
 <h3 class="fun-times"><a href="{%url 'profile-O' game.profile.pk%}">Continue</a></h3>
 {%else%}
-<h3 class="fun-times" style="margin-left: 32%;"><a href="{%url 'login' %}">Log in to Continue</a></h3>
+<h3 class="fun-times" style="margin-left: 40%;"><a href="{%url 'login' %}">Log in to Continue</a></h3>
 {%endif%}
+</div>
 {%endblock%}
 <!-- can also do a continue maybe if time, this would basically see if any games are unfinished and then pull up the data to populate the fields -->

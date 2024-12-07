@@ -14,6 +14,20 @@
                 /* apply to everything, makes the padding be accounted for with the width of elements. */
                 box-sizing: border-box;
                 font-family: "Press Start 2P", system-ui;
+                /* padding:30px; */
+            }
+            @media(max-width: 1068px){
+                .page-contents{
+                    padding: 20px;
+                    margin-top: 15vh;
+                }
+            }
+            @media(min-width: 1069px){
+                .page-contents{
+                    padding:30px;
+                    margin-top:40px;
+                }
+
             }
         </style>
     </head>
@@ -30,11 +44,11 @@
                 {%elif session_profile_pk%}
                 <li><a href="{%url 'profile-O' session_profile_pk%}">User Page</a></li>
                 {%else%}
-                <li><a href="{%url 'profile-O' 3%}">User Page</a></li>
+                <li><a href="{%url 'login-O' %}">User Page</a></li>
                 {%endif%}
                 <li><a href="{%url 'leaderboard' %}">LeaderBoard</a></li>
-                {%if request.user.is_authenticated%}
-               
+                {%if request.user.is_authenticated%} 
+        
                 <form action="{%url 'logout-O' %}" method="POST">
                     {%csrf_token%}
                     <input type="submit" value="logout">
@@ -42,10 +56,7 @@
                 {%else%}
                 <li><a href="{%url 'login-O' %}">Login</a></li>
                 {%endif%}
-                {%if request.user.is_authenticated%}
-                {%else%}
-                <li><a href="{%url 'create_profile-O' %}">Create New Profile</a></li>
-                {%endif%}
+               
                 
                 <!-- <li><a href="{%url 'show_all'%}">Show All</a></li>
                 <li><a href="{%url 'about'%}">About</a></li> -->
@@ -59,8 +70,10 @@
             </h1> -->
 
         </div>
+        <!-- <div class="page-contents"> -->
         {%block content%}
         {%endblock%}
+    <!-- </div> -->
 
     </body>
 </html>
