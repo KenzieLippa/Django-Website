@@ -44,10 +44,10 @@ function getAdult(val){
     switch(val){
         case "True":
            // kidY=0
-            return {adult: true, y:0, scale: 1}
+            return {adult: true, y:0, x: 0, scale: 1}
         case "False":
           //  kidY=125
-            return {adult:false, y:125, scale: 0.5}
+            return {adult:false, y:125, x:55, scale: 0.5}
     }
 }
 
@@ -191,7 +191,7 @@ const player1J = new Character({
 console.log("p1 fine")
 const player2J = new Character({
     position: {
-    x : 900 + offsetX,
+    x : 900 + offsetX  + py2_adult.x,
     y: 400 + py2_adult.y
     },
     
@@ -222,7 +222,7 @@ const player2J = new Character({
 });
 const player3J = new Character({
     position: {
-    x : 1100 + offsetX,
+    x : 1100 + offsetX + py3_adult.x,
     y: 400+ py3_adult.y
     },
     
@@ -253,7 +253,7 @@ const player3J = new Character({
 });
 const player4J = new Character({
     position: {
-    x : 1200 + offsetX,
+    x : 1200 + offsetX + py4_adult.x,
     y: 400 + py4_adult.y
     },
     
@@ -284,7 +284,7 @@ const player4J = new Character({
 });
 const player5J = new Character({
     position: {
-    x : 1300 + offsetX,
+    x : 1300 + offsetX + py5_adult.x,
     y: 400 + py5_adult.y
     },
     
@@ -423,7 +423,12 @@ document.getElementById("saveButton").addEventListener("click", () =>{
             "Content-Type": "application/json",
             "X-CSRFToken": getCookie("csrftoken"),
         },
-        body: JSON.stringify({miles:miles}),
+        body: JSON.stringify({
+            miles:miles,
+            // add more here if we want to save more
+            //player1j.currentInjury: player1j.currentInjury,
+
+        }),
     })
     .then(response => response.json())
     .then(data => {

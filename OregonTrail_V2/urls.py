@@ -12,5 +12,6 @@ urlpatterns =[
     path('create_player', Create_Player_View.as_view(), name='create_player'),
     path('game/<int:pk>/delete', DeleteGameView.as_view(), name='delete_game',),
     path('game/<int:pk>', GameDetailView.as_view(), name="play_game"),
-    path('update_game/<int:game_id>/', update_game, name='update_game')
+    path('update_game/<int:game_id>/', update_game, name='update_game'),
+    path('leaderboard/', LeaderboardView.as_view(), name='leaderboard')
 ]

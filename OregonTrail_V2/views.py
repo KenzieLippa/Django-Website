@@ -29,7 +29,8 @@ def base(req):
     profile = None
     if req.user.is_authenticated:
         profile = get_object_or_404(Profile, user=req.user)
-    return render(req, template_name, {'profile': profile})
+        boo =req.session['profile_pk'] = profile.pk
+    return render(req, template_name, {'profile': profile, 'profile_pk':boo})
 
 
 class Create_Profile_View(LoginRequiredMixin, CreateView):
@@ -288,3 +289,23 @@ def update_game(req, game_id):
 #         profile = game.profile
 
 #         return reverse('profile', kwargs={'pk':profile.pk})
+
+
+class LeaderboardView(ListView):
+    '''view to display the leaderboards'''
+    template_name='OregonTrail_V2/leaderboard.html'
+    model = Game
+    context_object_name = 'res'
+    paginate_by = 50
+    def get_queryset(self):
+       
+        qs = super().get_queryset().order_by('-miles')
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        '''need to get the profile pk because its not redirecting properly'''
+        context = super().get_context_data(**kwargs)
+        profile_pk = self.request.session.get('profile_pk')
+        context['session_profile_pk'] = profile_pk
+        return context
+    

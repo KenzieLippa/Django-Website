@@ -27,22 +27,32 @@
 {%endif%} -->
 <!-- <button class="stat-title"> {{profile.add_friend}}Add a Friend</button> -->
 <!-- {{profile.get_stat_msg}} -->
-{%for p in profile.get_games%}
-<div class="stat-msg">
-    
-    <!-- <div class="stat-msg-text"> -->
-    <p>Active: {{p.active}}</p>
-    <p>Miles Traveled: {{p.miles}}</p>
-    <p>Current Day: {{p.days}}</p>
-    <p>Current Season: {{p.season}}</p>
-    <p>Player 1: {{p.player1.name}}</p>
-    <p>gender: {{p.player1.gender}}</p>
-    <div style="display: flex; gap:10px;">
+ <div class="gallery-games" style="  
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+ justify-content: flex-start;
+ padding: 20px;">
 
-        <button><a href="{%url 'play_game' p.pk%}">Play</a></button>
-        <button><a href="{%url 'delete_game' p.pk%}">Delete</a></button>
+
+    {%for p in profile.get_games%}
+    <div class="game-box" >
+        
+        <!-- <div class="stat-msg-text"> -->
+        <p>Active: <strong>{{p.active}}</strong></p>
+        <p>Miles Traveled: <strong>{{p.miles}}</strong></p>
+        <p>Current Day: <strong>{{p.days}}</strong></p>
+        <p>Current Season: <strong>{{p.season}}</strong></p>
+        <p>Player 1: <strong>{{p.player1.name}}</strong></p>
+        <p>Gender: <strong>{{p.player1.gender}}</strong></p>
+        <div style="display: flex; gap:10px;">
+
+            <button><a href="{%url 'play_game' p.pk%}">Play</a></button>
+            <button><a href="{%url 'delete_game' p.pk%}">Delete</a></button>
+        </div>
     </div>
 
-{%endfor%}
+    {%endfor%}
 </div>
+<!-- </div> -->
 {%endblock%}

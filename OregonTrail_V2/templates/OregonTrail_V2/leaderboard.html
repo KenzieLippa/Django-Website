@@ -1,0 +1,25 @@
+{%extends 'OregonTrail_V2/base.html' %}
+{%block content%}
+<div class = "container" style="margin-left: 15%; margin-top: 2%;">
+    <div class ="row">
+        <!-- <h1 class="page-title">{{session_profile_pk}}</h1> -->
+        <table>
+            <tr>
+                <!-- <th>Username</th> -->
+                <th>Player Name</th>
+                <th>Miles</th>
+                <th>Place</th>
+                <!-- TODO: add more fields as time goes on -->
+            </tr>
+            {%for r in res%}
+            <tr>
+                <!-- <th>{{r.name}}</th> -->
+                <th>{{r.player1.name}}</th>
+                <th>{{r.miles}}</th>
+                <th>{{forloop.counter}}</th>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</div>
+{%endblock%}

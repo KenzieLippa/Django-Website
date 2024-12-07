@@ -95,7 +95,7 @@ class Game(models.Model):
 
     party = [player1, player2, player3, player4, player5]
     miles = models.IntegerField(default=0) #how many miles has the player gone
-    days = 0
+    days = models.IntegerField(default=0)
     # will be figured out later as different seasons will have different properties,
     #probably will make seasons their own model
     # currentSeason = models.CharField(
@@ -108,7 +108,7 @@ class Game(models.Model):
         choices=Season.choices1(),
         blank=False
     )
-    playersAlive = 5
+    playersAlive = models.IntegerField(default=5)
     dayState = Day.WALKING #default
 
     currDay = 0 #incramented each day
@@ -312,24 +312,24 @@ class Character(models.Model):
         blank=False
     )
     #will need to check this to determine whether to run any of these or not
-    dead = False
+    dead = models.BooleanField(default=False)
     #TODO: figure out how to populate the sprite, maybe through character creation on the js side
 
     #TODO: figure out the injury if we want to use enum or string rep, i think strings still fine as long as its consistent and might be easier with scope
     #also might end up being an object with propertiesnot sure
     # currentInjury = "None" #assign to a string or an enum, enum might be easier idk, im not sure where i would define it anyway
-    currentInjury = IJ.NONE
-    health = 100
-    injuryChance = 0.02
-    hunger = 0.1
-    healthLoss = 0
-    restDaysNeeded = 0
-    treated = False
+    currentInjury = models.TextField(default="IJ.NONE")
+    health = models.IntegerField(default=100)
+    injuryChance = models.FloatField(default=0.02)
+    hunger = models.FloatField(default=0.01)
+    healthLoss = models.IntegerField(default=0)
+    restDaysNeeded = models.IntegerField(default=0)
+    treated = models.BooleanField(default=False)
     #if no effort is put into healing the disease how long will it take till it is healed
-    slowHeal = 0
-    deathChance = 0
-    infected = False
-    stomach = 100
+    slowHeal = models.IntegerField(default=0)
+    deathChance = models.IntegerField(default=0)
+    infected = models.BooleanField(default=False)
+    stomach = models.IntegerField(default=100)
     if adult:
         # if the character is an adult then the hurt chance is lower
         health = 150
