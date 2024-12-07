@@ -131,6 +131,7 @@ class Character extends Sprite{
         this.deathChance = deathChance
         this.infected = infected
         this.stomach = stomach
+        this.hunger = 5
 
         for(const sprite in this.sprites){
             //go through each object and create new images for each
@@ -193,7 +194,7 @@ class Character extends Sprite{
             case IJ.BROKEN_ARM:
             //'''worse than the arm because the player is running on it'''
                 this.healthLoss = -0.01
-                this.getInfected(self.injuryChance)
+                this.getInfected(this.injuryChance)
                 if (this.infected){
 
                     this.deathChance = 30
@@ -210,7 +211,7 @@ class Character extends Sprite{
                 break
             case IJ.BROKEN_LEG:
                 this.healthLoss = -0.03
-                this.getInfected(self.injuryChance)
+                this.getInfected(this.injuryChance)
                 if (this.infected){
 
                     this.deathChance = 40
@@ -244,7 +245,7 @@ class Character extends Sprite{
                 break
                 
             }
-            if (self.treated){
+            if (this.treated){
     
                 this.slowHeal = 1
                 this.restDaysNeeded = 1
@@ -257,11 +258,19 @@ class Character extends Sprite{
     getDead(){
         return this.dead
     }
+    getStomach(){
+        return this.stomach
+    }
+    setStomach(val){
+        this.stomach = val
+    }
     eat(){
-        self.stomach -= self.hunger
+        if(this.stomach > -100)
+            this.stomach -= this.hunger
+       console.log(this.stomach)
         if (this.stomach < 50){
             // # if less than 50 then double the hunger
-             this.hunger += self.hunger
+             this.hunger += this.hunger
 
         }
         if (this.stomach < 25){
@@ -313,11 +322,12 @@ class Character extends Sprite{
         }
     }
     snakeEyes(){
-        c = Math.ceil(Math.random() * 10)
-        if (c===1){
-            d = Math.ceil(Math.random() * 10)
+        console.log("snake eyes called")
+        let b = Math.ceil(Math.random() * 10)
+        if (b===1){
+            let d = Math.ceil(Math.random() * 10)
             if(d===1){
-                e = Math.ceil(Math.random() * 10)
+                let e = Math.ceil(Math.random() * 10)
                 if(e ===1){
                     this.die()
                 }
@@ -325,6 +335,7 @@ class Character extends Sprite{
         }
     }
     hurt(){
+        console.log("CALLED THE HURT METHOD")
         //if we run out of health we run this and also the snake eyes function to see if we die
         if(this.health === 0){
             this.deathChance = 10 + this.deathChance
@@ -332,9 +343,9 @@ class Character extends Sprite{
                 this.snakeEyes()
             }
         }
-        else if(self.health < 0)
+        else if(this.health < 0)
         {   
-            this.deathChance = 100 + self.deathChance
+            this.deathChance = 100 + this.deathChance
             for(let i = 0; i < this.deathChance; i++){
                 this.snakeEyes()
             }
@@ -344,16 +355,21 @@ class Character extends Sprite{
                 this.snakeEyes()
             }
         }
-        self.health += self.healthLoss
+        if(this.health> 0)
+            this.health -= this.healthLoss
+        console.log(this.stomach)
+        console.log(this.health)
     }
     die(){
-        self.dead = true
+        alert(this.name+ " HAS DIED!")
+       // console.log("YOU HAVE DIED! "+ this.name)
+        this.dead = true
     }
     getInfected(chance){
         //a random function to determine whether or not to get infected
         c = Math.ceil(Math.random()*100) * chance
         if (chance >= 1){
-            self.infected = true
+            this.infected = true
         }
     }
 
@@ -366,7 +382,7 @@ class Character extends Sprite{
         this.setInjuryStats()
     }
     finishRest(){
-        if(self.restDaysNeeded === 0 || this.slowHeal === 0){
+        if(this.restDaysNeeded === 0 || this.slowHeal === 0){
             this.currentInjury = IJ.NONE
             this.setInjuryStats()
         }
