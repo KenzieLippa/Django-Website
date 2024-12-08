@@ -369,7 +369,7 @@ function animate(){
                 console.log(miles)
                 for(let i = 0; i < party.length; i++){
                     if(!party[i].dead){
-            
+                        //party[i].die()
                         party[i].eat()
                       //  console.log(party[i].stomach)
                     //    if(party[i].getStomach() < 50){
@@ -382,12 +382,16 @@ function animate(){
                             }
                             console.log("ABOUT TO CALL HURT food is: " + food)
                             party[i].hurt()
-                        // }
+                            party[i].die()
+                            
+                            // }
+                        }
                     }
-                }
+                    //party[1].die()
             }
         })
     }
+    
         
     wagon.update()
     ox.update()
@@ -409,6 +413,7 @@ function animate(){
     WagonFood.update()
     parallax = requestAnimationFrame(animate);
 }
+
 function togglePause(){
     console.log(miles)
     gamePaused = !gamePaused
@@ -425,6 +430,15 @@ function togglePause(){
         cancelAnimationFrame(parallax)
     }
 }
+
+// for(let j = 0; j < party.length; j++){
+//     if(!party[j].alertShown){
+//         showAlert(party[j].name +" Has Died!");
+//         party[j].showAlert = true
+//         togglePause()
+        
+//     }
+// }
 // document.addEventListener('keydown', (event) => {
 //     if (event.key === 'g') { // Example: Press "P" to pause/unpause
 //         console.log(event.key)

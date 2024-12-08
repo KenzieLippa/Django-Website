@@ -118,6 +118,7 @@ class Character extends Sprite{
         this.framesHold = 15
         this.sprites = sprites
         this.dead = dead
+        this.alertShown = false
 
         this.injured = false; //set to false by default
         //set in our attack box
