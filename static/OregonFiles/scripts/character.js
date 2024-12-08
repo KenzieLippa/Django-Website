@@ -78,7 +78,7 @@ class Character extends Sprite{
         gender,
         currentInjury = IJ.NONE,
         health = 100,
-        injuryChance = 0.2,
+        injuryChance = 0.05,
         healthLoss = 0,
         deathChance = 0,
         infected = false,
@@ -160,7 +160,7 @@ class Character extends Sprite{
                     //set the injury chance back
                 else{
 
-                    this.injuryChance = 0.2
+                    this.injuryChance = 0.1
                     this.hunger = 1
                     this.healthLoss = 0
                     this.restDaysNeeded = 0
@@ -174,7 +174,7 @@ class Character extends Sprite{
             case IJ.CHOLERA:
                 this.healthLoss = -0.2
                 this.hunger = 3
-                this.injuryChance = 0.3
+                this.injuryChance = 0.1
                 this.restDaysNeeded = 3
                 this.slowHeal = 6
                 this.deathChance = 10
@@ -184,7 +184,7 @@ class Character extends Sprite{
             //'''much more deadly i think'''
                 this.healthLoss = -0.5
                 this.hunger = 4
-                this.injuryChance = 0.9
+                this.injuryChance = 0.45
                 this.restDaysNeeded = 5
                 this.slowHeal = 10
                 this.deathChance = 20
@@ -386,10 +386,13 @@ class Character extends Sprite{
     
     async die(){
         // alert(this.name+ " HAS DIED!")
-        let str = this.name + " HAS DIED!"
-        await showAlert(str);
-       // console.log("YOU HAVE DIED! "+ this.name)
-        this.dead = true
+        if(!this.dead){
+
+            let str = this.name + " HAS DIED!"
+            await showAlert(str);
+           // console.log("YOU HAVE DIED! "+ this.name)
+            this.dead = true
+        }
     }
     async getInfected(chance){
         //a random function to determine whether or not to get infected
