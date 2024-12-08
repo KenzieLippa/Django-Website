@@ -361,7 +361,9 @@ class Character extends Sprite{
         console.log(this.health)
     }
     die(){
-        alert(this.name+ " HAS DIED!")
+        // alert(this.name+ " HAS DIED!")
+        let str = this.name + " HAS DIED!"
+        showAlert(str)
        // console.log("YOU HAVE DIED! "+ this.name)
         this.dead = true
     }
@@ -378,6 +380,22 @@ class Character extends Sprite{
         this.setInjuryStats() //make sure we set the stats
     }
     getIJ(){
+        switch(this.currentInjury){
+            case IJ.NONE:
+                return this.name + "Has no injury, Congrats!"
+            case IJ.CHOLERA:
+                return this.name + "Has Cholera!"
+            case IJ.DYSENTERY:
+                return this.name + "Has Dysentery!"
+            case IJ.BROKEN_ARM:
+                return this.name + "Has a broken arm!"
+            case IJ.BROKEN_LEG:
+                return this.name + "Has a broken leg!"
+            case IJ.SNAKE_BITE:
+                return this.name + "Has a snake bite!"
+        }
+    }
+    healIJ(){
         this.treated = true
         this.setInjuryStats()
     }

@@ -164,6 +164,14 @@ const p5_stomach = "{{game.player5.stomach}}";
         background-color: #4caf50;
         transition: width 0.1s linear;
     }
+    .center-box{
+        background-image: url("{%static 'OregonFiles/assets/DialogueBox.PNG' %}");
+        background-size: contain;
+        background-repeat: no-repeat ;
+        background-position: center;
+        visibility: hidden;
+        opacity: 0;
+    }
     
  </style>
  <div style = "position: relative; text-align: center;">
@@ -182,9 +190,10 @@ const p5_stomach = "{{game.player5.stomach}}";
 
  <!-- TODO make dialogue hideable and showable and then do the text animation -->
 
- <!-- <div class="center-box" style="position:absolute; top:50%; left:50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 15px; z-index: 10;">
-    <p>test dialogue</p>
- </div> -->
+ <div class="center-box" id = "dialogue-box" style="position:absolute; top:50%; left:50%; width:400px; height: 150px; transform: translate(-50%, -50%);  padding: 20px; border-radius: 15px; z-index: 10;">
+    <p id = "dialogue-text" style="margin-bottom: 40px;">test dialogue</p>
+    <button onclick="closeAlert()">OK</button>
+ </div>
  <button id="pauseBtn" style="position: absolute; bottom: 80px; left:30%; transform: translateX(-50%);">
      Stop
     </button>
