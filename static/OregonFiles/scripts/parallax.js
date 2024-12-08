@@ -148,6 +148,13 @@ const py3_adult = getAdult(p3_adult)
 const py4_adult = getAdult(p4_adult)
 const py5_adult = getAdult(p5_adult)
 
+const py1_dead = getPythonBool(p1_dead)
+const py2_dead = getPythonBool(p2_dead)
+const py3_dead = getPythonBool(p3_dead)
+const py4_dead = getPythonBool(p4_dead)
+const py5_dead = getPythonBool(p5_dead)
+
+
 
 console.log(py1_gender)
 // function getScale(val){
@@ -178,7 +185,7 @@ const player1J = new Character({
     //name:"chad",
     adult: py1_adult.adult,
     gender: py1_gender.gender,
-
+    dead: py1_dead,
 
     sprites:{
         idle:{
@@ -211,6 +218,7 @@ const player2J = new Character({
     name: p2_name,
     adult: py2_adult.adult,
     gender: py2_gender.gender,
+    dead: py2_dead,
 
     sprites:{
         idle:{
@@ -242,6 +250,7 @@ const player3J = new Character({
     name: p3_name,
     adult: py3_adult.adult,
     gender: py3_gender.gender,
+    dead: py3_dead,
 
     sprites:{
         idle:{
@@ -273,6 +282,7 @@ const player4J = new Character({
     name: p4_name,
     adult: py4_adult.adult,
     gender: py4_gender.gender,
+    dead: py4_dead,
 
     sprites:{
         idle:{
@@ -304,6 +314,7 @@ const player5J = new Character({
     name: p5_name,
     adult: py5_adult.adult,
     gender: py5_gender.gender,
+    dead: py5_dead,
 
     sprites:{
         idle:{
@@ -345,6 +356,9 @@ layers.forEach((layer, index) =>{
     images.push(img); //add to the list
     offsets.push(0) //start at 0
 });
+// async function showdead(){
+//     await showAlert(str);
+// }
 
 //animate the background
 function animate(){
@@ -371,8 +385,11 @@ function animate(){
                     if(!party[i].dead){
                         //party[i].die()
                         party[i].eat()
+                        party[i].hurt()
+                        party[i].injure()
+                       // party[i].die()
                       //  console.log(party[i].stomach)
-                    //    if(party[i].getStomach() < 50){
+                       if(party[i].getStomach() < 50){
                             if (food >0){
                                 food -= 5 //subtract 1 from food
                                 party[i].setStomach(100)
@@ -380,12 +397,12 @@ function animate(){
                                     width: food + '%'
                                 })
                             }
-                            console.log("ABOUT TO CALL HURT food is: " + food)
-                            party[i].hurt()
-                            party[i].die()
+                            //console.log("ABOUT TO CALL HURT food is: " + food)
+                           
                             
-                            // }
+                            }
                         }
+                        
                     }
                     //party[1].die()
             }
@@ -471,6 +488,11 @@ document.getElementById("saveButton").addEventListener("click", () =>{
         },
         body: JSON.stringify({
             miles:miles,
+            p1_dead: player1J.dead,
+            p2_dead: player2J.dead,
+            p3_dead: player3J.dead,
+            p4_dead: player4J.dead,
+            p5_dead: player5J.dead,
             // add more here if we want to save more
             //player1j.currentInjury: player1j.currentInjury,
 

@@ -337,6 +337,14 @@ class Character(models.Model):
         hunger = 0.2
         # TODO: test and tweak values
 
+
+    def reset(self):
+        '''reset so the character is no longer dead when a new game is started'''
+        self.dead = False
+        self.health = 100
+        self.stomach = 100
+        self.save()
+
     def setInjuryStats(self):
         '''setting stats based on injury
         SUBJECT TO CHANGE WITH TESTING'''

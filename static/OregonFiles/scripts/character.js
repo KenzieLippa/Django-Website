@@ -78,7 +78,7 @@ class Character extends Sprite{
         gender,
         currentInjury = IJ.NONE,
         health = 100,
-        injuryChance = 0.02,
+        injuryChance = 0.2,
         healthLoss = 0,
         deathChance = 0,
         infected = false,
@@ -148,20 +148,20 @@ class Character extends Sprite{
 
     setInjuryStats(){
         //set the injury stats when this is called
-        switch(self.currentInjury){
+        switch(this.currentInjury){
 
        
             case IJ.NONE:
                 if (this.adult){
-                    this.injuryChance = 0.01
-                    this.hunger = 0.2
+                    this.injuryChance = 0.1
+                    this.hunger = 2
 
                 }
                     //set the injury chance back
                 else{
 
-                    this.injuryChance = 0.02
-                    this.hunger = 0.1
+                    this.injuryChance = 0.2
+                    this.hunger = 1
                     this.healthLoss = 0
                     this.restDaysNeeded = 0
                     this.slowHeal = 0
@@ -173,8 +173,8 @@ class Character extends Sprite{
                 break
             case IJ.CHOLERA:
                 this.healthLoss = -0.2
-                this.hunger = 0.3
-                this.injuryChance = 0.03
+                this.hunger = 3
+                this.injuryChance = 0.3
                 this.restDaysNeeded = 3
                 this.slowHeal = 6
                 this.deathChance = 10
@@ -183,8 +183,8 @@ class Character extends Sprite{
             case IJ.DYSENTERY:
             //'''much more deadly i think'''
                 this.healthLoss = -0.5
-                this.hunger = 0.4
-                this.injuryChance = 0.09
+                this.hunger = 4
+                this.injuryChance = 0.9
                 this.restDaysNeeded = 5
                 this.slowHeal = 10
                 this.deathChance = 20
@@ -297,7 +297,10 @@ class Character extends Sprite{
         }
     }
 
-    injure(){
+    async injure(){
+        if(this.currentInjury === IJ.NONE){
+
+       
         let injurChance = this.injuryChance * 100
 
         let getInjury = Math.random() * 100
@@ -308,19 +311,38 @@ class Character extends Sprite{
             let boo = Math.ceil(Math.random() * 5)
             switch(boo){
                 case 0:
-                    return IJ.NONE
+                    this.currentInjury = IJ.NONE
+                    break
                 case 1:
-                    return IJ.DYSENTERY
+                    let str = this.name + " HAS DYSENTERY!"
+                    await showAlert(str);
+                    this.currentInjury = IJ.DYSENTERY
+                    break
                 case 2:
-                    return IJ.CHOLERA
+                    let str1 = this.name + " HAS CHOLERA"
+                    await showAlert(str1);
+                    this.currentInjury = IJ.CHOLERA
+                    break
                 case 3:
-                    return IJ.BROKEN_ARM
+                    let str2 = this.name + " HAS A BROKEN ARM!"
+                    await showAlert(str2);
+                    this.currentInjury = IJ.BROKEN_ARM
+                    break
                 case 4:
-                    return IJ.BROKEN_LEG
+                    let str3 = this.name + " HAS A BROKEN LEG!"
+                    await showAlert(str3);
+                    this.currentInjury = IJ.BROKEN_LEG
+                    break
                 case 5:
-                    return IJ.SNAKE_BITE
+                    let str4 = this.name + " HAS DIED!"
+                    await showAlert(str4);
+                    this.currentInjury = IJ.SNAKE_BITE
+                    break
             }
+            //set the new injury stats
+            this.setInjuryStats()
         }
+    }
     }
     snakeEyes(){
         console.log("snake eyes called")
@@ -361,17 +383,21 @@ class Character extends Sprite{
         console.log(this.stomach)
         console.log(this.health)
     }
-    die(){
+    
+    async die(){
         // alert(this.name+ " HAS DIED!")
         let str = this.name + " HAS DIED!"
-        showAlert(str)
+        await showAlert(str);
        // console.log("YOU HAVE DIED! "+ this.name)
         this.dead = true
     }
-    getInfected(chance){
+    async getInfected(chance){
         //a random function to determine whether or not to get infected
-        c = Math.ceil(Math.random()*100) * chance
-        if (chance >= 1){
+        let d = Math.ceil(Math.random()*100)
+        let chance2 = chance * 100
+        if (chance2 >= d){
+            let str = this.name + "'s INJURY IS INFECTED!"
+            await showAlert(str);
             this.infected = true
         }
     }

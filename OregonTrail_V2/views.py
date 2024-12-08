@@ -136,7 +136,17 @@ class Create_Game_View(LoginRequiredMixin, CreateView):
         profile = Profile.objects.get(user=user)
         form.instance.profile = profile
         #save the status msg to the db
-        form.save()
+        game = form.save(commit = False)
+        party = ['player1', 'player2', 'player3', 'player4', 'player5']
+        for playerg in party:
+            player = getattr(game, playerg)
+            print(player)
+            # playerx = Character.objects.get(pk=player)
+            if player:
+                print(player.name)
+                player.reset()
+            
+        game.save()
 
         #read the file from the form
         
@@ -195,7 +205,10 @@ class Create_Player_View(CreateView):
         # profile = Profile.objects.get(user=user)
         # form.instance.profile = profile
         #save the character to the db
+        # dont commit yet we have to reset the players
         form.save()
+
+        
 
       
        
@@ -252,14 +265,39 @@ def update_game(req, game_id):
         try:
             data = json.loads(req.body)
             miles = data.get("miles")
-            print(miles) #program is able to get the miles
+            p1_dead = data.get("p1_dead")
+            # print(p1_dead)
+            p2_dead = data.get("p2_dead")
+            # print(p2_dead)
+            p3_dead = data.get("p3_dead")
+            # print(p3_dead)
+            p4_dead = data.get("p4_dead")
+            # print(p4_dead)
+            p5_dead = data.get("p5_dead")
+            # print(p5_dead)
+
+            # get the game
+            # print(miles) #program is able to get the miles
             game = Game.objects.get(pk = game_id)
             # print(game.pk)
             game.miles = int(miles)
+            game.player1.dead = p1_dead
+            # print(game.player1.dead)
+            # set the stats with the data sent back
+            game.player2.dead = p2_dead
+            game.player3.dead = p3_dead
+            game.player4.dead = p4_dead
+            game.player5.dead = p5_dead
             game.save()
-            print(f"after update:{game.miles}")
+            game.player1.save()
+            game.player2.save()
+            game.player3.save()
+            game.player4.save()
+            game.player5.save()
+            # print(f"after update:{game.miles}")
             gameR = Game.objects.get(pk=game_id)
-            print(f"but really its: {gameR.miles}")
+            # print(f"but really its: {gameR.miles}")
+            # print(gameR.player1.dead)
             return JsonResponse({"success": True}, status=200)
         except Game.DoesNotExist:
             return JsonResponse({"success":False, "error":"Game not found"})

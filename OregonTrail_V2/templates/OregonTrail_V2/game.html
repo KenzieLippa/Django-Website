@@ -169,8 +169,12 @@ const p5_stomach = "{{game.player5.stomach}}";
         background-size: contain;
         background-repeat: no-repeat ;
         background-position: center;
-        visibility: hidden;
-        opacity: 0;
+        display: none;
+        /* visibility: hidden;
+        opacity: 0; */
+    }
+    .center-box.active{
+        display: block;
     }
     
  </style>
@@ -190,9 +194,9 @@ const p5_stomach = "{{game.player5.stomach}}";
 
  <!-- TODO make dialogue hideable and showable and then do the text animation -->
 
- <div class="center-box" id = "dialogue-box" style="position:absolute; top:50%; left:50%; width:400px; height: 150px; transform: translate(-50%, -50%);  padding: 20px; border-radius: 15px; z-index: 10;">
-    <p id = "dialogue-text" style="margin-bottom: 40px;">test dialogue</p>
-    <button onclick="closeAlert()">OK</button>
+ <div class="center-box" id = "dialogue-box" style="position:absolute; top:50%; left:50%; width:900px; height: 400px; transform: translate(-50%, -50%);  padding: 20px; border-radius: 15px; z-index: 10;">
+    <p id = "dialogue-text" style="margin-bottom: 130px; margin-top: 60px;">test dialogue</p>
+    <button id="dialogue-ok-btn" >OK</button>
  </div>
  <button id="pauseBtn" style="position: absolute; bottom: 80px; left:30%; transform: translateX(-50%);">
      Stop
@@ -202,8 +206,8 @@ const p5_stomach = "{{game.player5.stomach}}";
         <button id="saveButton">Save Miles</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{%static 'OregonFiles/scripts/utils.js'%}"></script>
     <script src="{%static 'OregonFiles/scripts/modelFuncs.js'%}"></script>
+    <script src="{%static 'OregonFiles/scripts/utils.js'%}"></script>
     <script src="{%static 'OregonFiles/scripts/character.js'%}"></script>
     <script src="{%static 'OregonFiles/scripts/parallax.js'%}"></script>
 </div>
