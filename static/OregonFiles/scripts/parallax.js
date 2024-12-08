@@ -11,6 +11,7 @@ let offsetX = 200
 //for if we end up wanting to actually not hard code things
 const kidX = 525
 const adultX = 400
+let wagonHealth = 100
 
 let step = 0;
 let gameId = game_id
@@ -18,6 +19,9 @@ let food = 100
 
 gsap.to('#food', {
     width: food + '%'
+})
+gsap.to('#wagon',{
+    width: wagonHealth + '%'
 })
 //fill the window but may need to fix with the nav bar
 //canvas size
@@ -395,6 +399,13 @@ function animate(){
                                 party[i].setStomach(100)
                                 gsap.to('#food', {
                                     width: food + '%'
+                                })
+                            }
+                            else{
+                                wagonHealth -= 5
+                                food = 100
+                                gsap.to('#wagon', {
+                                    width: wagonHealth + '%'
                                 })
                             }
                             //console.log("ABOUT TO CALL HURT food is: " + food)
