@@ -1,0 +1,22 @@
+{%extends 'OregonTrail_V2/base.html'%}
+{%load static%}
+{%block content%}
+
+<link rel="stylesheet" href="{% static 'styles4.css'%}">
+<div class="add-prof">
+<h2>Create a New Profile</h2>
+<form method="post">
+    {%csrf_token%}
+    {{user_create_form.as_p}}
+    {{form.as_p}}
+    <div class="cancel">
+<input type="submit" name= 'add a profile' value="Add a Profile">
+
+
+</form>
+<form action="{%url 'home'%}">
+    <input type="submit" name= 'cancel' value= "Cancel" class="cancel-color">
+    </form>
+</div>
+</div>
+{%endblock%}

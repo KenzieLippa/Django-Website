@@ -33,7 +33,55 @@ def base(req):
         boo =req.session['profile_pk'] = profile.pk
     return render(req, template_name, {'profile': profile, 'profile_pk':boo})
 
+class Create_Full_Profile_View(CreateView):
+    # adding the login mixin to both this and the other
+    '''a view to create a new profile and save to the database'''
+    form_class = CreateProfileForm
+    template_name = 'OregonTrail_V2/createFullProfile.html'
+    # user_create = UserCreationForm #not sure if this is the right place
 
+    
+
+    def get_success_url(self) -> str:
+        '''redirect the url after successfully submitting form'''
+        return reverse('profile-O', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        '''handle the form submission and get the foreign key?'''
+        # profile = Profile.objects.get(pk=self.kwargs['pk'])
+        # form.instance.profile = profile
+        print(f'CreateProfileView: form.cleaned_data={form.cleaned_data}')
+        # if self.request.POST:
+        user_create = UserCreationForm(self.request.POST)
+        if not user_create.is_valid():
+            print(f"form.errors={user_create.errors}")
+            return super().form_invalid(form)
+            
+        user = user_create.save()
+        
+        # form.instance.user = user
+
+            # login the user
+        print(f"Create_Profile_View user={user} profile.user={user}")
+        form.instance.user = user
+        login(self.request, user)
+
+
+        
+        return super().form_valid(form)
+    
+
+    def get_context_data(self, **kwargs):
+        # gets teh context dictionary from the base class
+        context = super().get_context_data(**kwargs)
+
+        #creates the instance of the form which can be passed through
+        # user_create_form = self.user_create(self.request.POST) #there is no way this is gonna work lol
+
+        # add user form to the context
+        context['user_create_form'] = UserCreationForm()
+        return context
+    
 class Create_Profile_View(LoginRequiredMixin, CreateView):
     # adding the login mixin to both this and the other
     '''a view to create a new profile and save to the database'''
@@ -260,6 +308,7 @@ class GameDetailView(DetailView):
 # 
 # @csrf_exempt
 def update_game(req, game_id):
+    '''the place where the post request from the save js comes'''
     if req.method == "POST":
 
         try:
@@ -274,6 +323,7 @@ def update_game(req, game_id):
             p4_dead = data.get("p4_dead")
             # print(p4_dead)
             p5_dead = data.get("p5_dead")
+            day = data.get("days")
             # print(p5_dead)
 
             # get the game
@@ -288,6 +338,8 @@ def update_game(req, game_id):
             game.player3.dead = p3_dead
             game.player4.dead = p4_dead
             game.player5.dead = p5_dead
+
+            game.days = day
             game.save()
             game.player1.save()
             game.player2.save()
@@ -337,9 +389,33 @@ class LeaderboardView(ListView):
     context_object_name = 'res'
     paginate_by = 50
     def get_queryset(self):
-       
+        '''get the query set and search if queries '''
         qs = super().get_queryset().order_by('-miles')
+        if 'player1Name' in self.request.GET:
+            print("found")
+            player1Name = self.request.GET['player1Name'].strip()
+            if player1Name:
+                print(player1Name)
+                qs = qs.filter(player1__name=player1Name)
+                print(len(qs))
+         
+       
+        if 'high-day' in self.request.GET:
+            day = self.request.GET['high-day']
+            if day:
+                print(day) #not sure what this prints
+                qs = qs.order_by('-days')
+
+        if 'high-mile' in self.request.GET:
+            mile = self.request.GET['high-mile']
+            if mile:
+                print(mile) #not sure what this prints
+                qs = qs.order_by('-miles')
+
+    
         return qs
+       
+       
     
     def get_context_data(self, **kwargs):
         '''need to get the profile pk because its not redirecting properly'''

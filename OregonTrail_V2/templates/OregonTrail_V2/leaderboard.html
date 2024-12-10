@@ -3,12 +3,14 @@
 <div class="page-contents">
 <div class = "container" style="margin-left: 15%; margin-top: 2%;">
     <div class ="row">
+        <!-- for each person we populate the fields  -->
         <!-- <h1 class="page-title">{{session_profile_pk}}</h1> -->
         <table>
             <tr>
                 <!-- <th>Username</th> -->
                 <th>Player Name</th>
                 <th>Miles</th>
+                <th>Days</th>
                 <th>Place</th>
                 <!-- TODO: add more fields as time goes on -->
             </tr>
@@ -17,11 +19,15 @@
                 <!-- <th>{{r.name}}</th> -->
                 <th>{{r.player1.name}}</th>
                 <th>{{r.miles}}</th>
+                <th>{{r.days}}</th>
                 <th>{{forloop.counter}}</th>
             </tr>
             {%endfor%}
         </table>
     </div>
 </div>
+</div>
+<div class="filter">
+    {% include "OregonTrail_V2/search.html"%}
 </div>
 {%endblock%}

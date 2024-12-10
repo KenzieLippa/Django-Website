@@ -27,6 +27,7 @@ gsap.to('#wagon',{
 //canvas size
 canvas.width = 1710
 canvas.height = 900
+let day = days; //assign with the value from the db
 console.log(p1_currIJ)
 let kidY = 125
 // if(p1_currIJ === "IJ.NONE"){
@@ -414,8 +415,17 @@ function animate(){
                             }
                         }
                         
-                    }
+                }
                     //party[1].die()
+                    if(miles % 2 === 0){
+                        day ++
+                        console.log("update day" + day)
+                        //update the html
+                        document.getElementById('day-counter').innerHTML = "Day: " + day 
+                        //walk 15 miles a day
+
+                        //in the future could add all kinds of other updates to this
+                    }
             }
         })
     }
@@ -504,6 +514,7 @@ document.getElementById("saveButton").addEventListener("click", () =>{
             p3_dead: player3J.dead,
             p4_dead: player4J.dead,
             p5_dead: player5J.dead,
+            days: day,
             // add more here if we want to save more
             //player1j.currentInjury: player1j.currentInjury,
 
@@ -512,10 +523,10 @@ document.getElementById("saveButton").addEventListener("click", () =>{
     .then(response => response.json())
     .then(data => {
         if(data.success){
-            alert("Miles updated")
+            alert("Game updated")
         }
         else{
-            alert("failed to update miles" + data.error);
+            alert("failed to update game" + data.error);
         }
 
     })

@@ -13,5 +13,6 @@ urlpatterns =[
     path('game/<int:pk>/delete', DeleteGameView.as_view(), name='delete_game',),
     path('game/<int:pk>', GameDetailView.as_view(), name="play_game"),
     path('update_game/<int:game_id>/', update_game, name='update_game'),
-    path('leaderboard/', LeaderboardView.as_view(), name='leaderboard')
+    path('leaderboard/', LeaderboardView.as_view(), name='leaderboard'),
+    path('create_full_profile/', Create_Full_Profile_View.as_view(), name='create_full_profile')
 ]

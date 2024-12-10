@@ -11,11 +11,11 @@
     {%csrf_token%}
     {{form.as_p}}
     <div class="cancel">
+        <!-- can create a custom player -->
 <input type="submit" name= 'add a player' value="Create!">
 
 
 </form>
-<!-- IF THERES TIME FIX THIS -->
 <!-- <form method = "post" action="{%url 'create_player'%}">
     {%csrf_token%}
     <input type="submit" name = "custom" value="Create and Add Another">
