@@ -113,15 +113,22 @@ class Character extends Sprite{
         this.health = 100
 
         //could try to refactor later
+        //set the animation properties
         this.frameCurr = 0
         this.framesElapsed = 0
         this.framesHold = 15
+        //populate the sprite and deaths fields
         this.sprites = sprites
         this.dead = dead
+        //something i was going to use to help fix the double dead popup but it didnt help
+        //double dead only happens sometimes its probably because of how the snake eyes func works
+        //if the player dies twice then its called twice
         this.alertShown = false
 
         this.injured = false; //set to false by default
-        //set in our attack box
+        
+
+        //set our personal stats from the db
         this.name = name
         this.adult = adult
         this.gender = gender
@@ -266,6 +273,7 @@ class Character extends Sprite{
         this.stomach = val
     }
     eat(){
+        //prevent from being too negative
         if(this.stomach > -100)
             this.stomach -= this.hunger
        console.log(this.stomach)
@@ -276,7 +284,7 @@ class Character extends Sprite{
         }
         if (this.stomach < 25){
             this.hunger += this.hunger
-            this.injurChance
+           // this.injurChance
         }
         if (this.stomach < 10){
 
@@ -388,10 +396,10 @@ class Character extends Sprite{
         // alert(this.name+ " HAS DIED!")
         if(!this.dead){
 
+            this.dead = true
             let str = this.name + " HAS DIED!"
             await showAlert(str);
            // console.log("YOU HAVE DIED! "+ this.name)
-            this.dead = true
         }
     }
     async getInfected(chance){

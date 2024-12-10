@@ -65,7 +65,9 @@ class Create_Full_Profile_View(CreateView):
         print(f"Create_Profile_View user={user} profile.user={user}")
         form.instance.user = user
         login(self.request, user)
-
+        # if req.user.is_authenticated:
+        # profile = get_object_or_404(Profile, user=user)
+        # boo = req.session['profile_pk'] = profile.pk
 
         
         return super().form_valid(form)
