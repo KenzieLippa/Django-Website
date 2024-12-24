@@ -1,0 +1,96 @@
+{%extends 'keno/base.html'%}
+{%load static%}
+{%block content%}
+<h1 class="page-title">Keno Card</h1>
+<style>
+    button.keno-button.selected{
+        background-color: #4CAF50;
+        color: black;
+        border: 3px solid #2E7D32;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        const buttons = document.querySelectorAll('.keno-button');
+        const hiddenInput = document.getElementById('selected-buttons');
+        const maxSelectionInput = document.getElementById('max-selection-hidden');
+
+        //event listener for the drop down
+        const maxSelectionDropdown = document.getElementById('max-selection');
+        maxSelectionDropdown.addEventListener('change', ()=>{
+            maxSelectionInput.value = maxSelectionDropdown.value;
+        })
+
+        buttons.forEach(button =>{
+            button.addEventListener('click',()=>{
+                //toggle the class on the buttons
+                // button.classList.toggle('selected');
+                const selectedButton = document.querySelectorAll('.keno-button.selected');
+
+                //check if the selection limit is reached
+                const maxSelection = parseInt(maxSelectionInput.value);
+                if(selectedButton.length >= maxSelection && !button.classList.contains('selected')){
+                    alert(`you can only select up to ${maxSelection} spots`);
+                    return;
+                }
+                button.classList.toggle('selected');
+
+                //update the hidden input value with the ids
+                const selectedIds = Array.from(document.querySelectorAll('.keno-button.selected'))
+                    .map(btn => btn.getAttribute('data-id'));
+                hiddenInput.value = selectedIds.join(',');
+
+                console.log("selected ids: ", selectedIds);
+                console.log("hidden input value: ", hiddenInput.value)
+            })
+        })
+
+    })
+</script>
+<form method = "POST" action="{%url 'keno_game'%}">
+    {%csrf_token%}
+    <label for="max-selection">Select the number of spots:</label>
+    <select name="max_selection" id="max-selection" onchange="updateMaxSelection()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+    <div class="spotsToPlay" style="  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;">
+        {%for i in range_80%}
+        <div class="kenoButtons">
+            <button type="button"
+            class="keno-button {%if i in selected_buttons%}selected{% endif %}"
+            data-id="{{ i }}">{{ i }}
+        </button>
+        </div>
+        {%endfor%}
+    </div>
+    <label for="moneyPerGame">Select the money per game:</label>
+    <select name="moneyPerGame" id="moneyPerGame" >
+        <option value="1">$1</option>
+        <option value="2">$2</option>
+        <option value="5">$5</option>
+        <option value="10">$10</option>
+        <option value="20">$20</option>
+    
+    </select>
+    <h1 class="page-title"></h1>
+    <input type="hidden" name="selected_buttons" id="selected-buttons" value="{%if selected_buttons%}{{selected_buttons|join:','}}{%endif%}">
+    <input type="hidden" name="max_selection_hidden" id="max-selection-hidden" value="1">
+    <button type="submit">ROLL NUMBERS!</button>
+</form>
+{%endblock%}

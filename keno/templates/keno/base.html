@@ -1,0 +1,78 @@
+{%load static%}
+<html>
+    <head>
+        <title>Keno</title>
+        <!-- TODO: change this later to not suck and be this group specific -->
+
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Sofadi+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "styles3.css" %}">
+           
+        <style>
+            *{
+                /* apply to everything, makes the padding be accounted for with the width of elements. */
+                box-sizing: border-box;
+                font-family: "Press Start 2P", system-ui;
+                /* padding:30px; */
+            }
+            @media(max-width: 1068px){
+                .page-contents{
+                    padding: 20px;
+                    margin-top: 15vh;
+                }
+            }
+            @media(min-width: 1069px){
+                .page-contents{
+                    padding:30px;
+                    margin-top:40px;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="joes-nav">
+            <div class = "cont">
+            <ul class="nav-links">
+                <li><a href="{%url 'kenoBase'%}">Home</a></li>
+                <!-- want to add link back to profile but not sure how pk is being passed through here -->
+                <!-- {%if profile.pk%}
+                <li><a href="{%url 'profile-O' profile.pk%}">User Page</a></li>
+                {%elif game.profile.pk%}
+                <li><a href="{%url 'profile-O' game.profile.pk%}">User Page</a></li>
+                {%elif session_profile_pk%}
+                <li><a href="{%url 'profile-O' session_profile_pk%}">User Page</a></li>
+                {%else%}
+                <li><a href="{%url 'login-O' %}">User Page</a></li>
+                {%endif%}
+                <li><a href="{%url 'leaderboard' %}">LeaderBoard</a></li>
+                {%if request.user.is_authenticated%} 
+        
+                <form action="{%url 'logout-O' %}" method="POST">
+                    {%csrf_token%}
+                    <input type="submit" value="logout">
+                </form>
+                {%else%}
+                <li><a href="{%url 'login-O' %}">Login</a></li>
+                {%endif%}
+               
+                 -->
+              
+            </ul>
+        </div>
+        </nav>
+        <div>
+            
+            <!-- <h1 class="page-title">
+                ------------------------------------------------------------------------------------------------------
+            </h1> -->
+
+        </div>
+        <!-- <div class="page-contents"> -->
+        {%block content%}
+        {%endblock%}
+    <!-- </div> -->
+
+    </body>
+</html>

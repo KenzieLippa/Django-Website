@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quotes',
+    # 'quotes',
     'formdata',
     'restaurant',
     'blog',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'db_examples',
     'marathon_minutes',
     'OregonTrail_V2', #done with vanilla js ect
+    'keno',
     # 'csp',
     # due to a horrible error with java script the files from class were removed
     

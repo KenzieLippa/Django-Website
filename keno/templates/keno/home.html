@@ -1,0 +1,62 @@
+{%extends 'keno/base.html'%}
+{%block content%}
+{%load static%}
+<!-- <div class="page-contents"> -->
+    <style>
+        .dialogue-box{
+        background-image: url("{%static 'OregonFiles/assets/DialogueBox.PNG' %}");
+        background-size: contain;
+        background-repeat: no-repeat ;
+        background-position: center;
+        position:absolute; 
+        top:30%; 
+        left:50%; 
+        width: 500px; 
+        height: 250px; 
+        transform: translate(-50%, -50%);  
+        padding: 30px; 
+        border-radius: 15px; 
+        z-index: 10;
+    
+    }
+    .button-container{
+        position: absolute;
+        bottom: 30%;
+        left: 44%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+    </style>
+<div style = "position: relative; text-align: center;">
+    <canvas style="display:block;"></canvas>
+
+<div class="dialogue-box">
+<h1  style="color:black; margin-bottom: 10px; font-size: 55px;">Keno</h1>
+</div>
+
+<div class = "button-container" >
+<h3 class = "fun-times" style="width: 300px;"><a href="{%url 'kenoCard' %}">New_Game</a></h3>
+<!-- {%if profile.pk%}
+<h3 class="fun-times" ><a href="{%url 'profile-O' profile.pk%}">Continue</a></h3>
+{%elif game.profile.pk%}
+<h3 class="fun-times"><a href="{%url 'profile-O' game.profile.pk%}">Continue</a></h3>
+{%else%}
+<h3 class="fun-times" ><a href="{%url 'login-O' %}">Log in to Continue</a></h3>
+{%endif%} -->
+</div>
+<!-- </div> -->
+<script>
+      // stuff for my background 
+    const wind = "{%static 'OregonFiles/assets/Wind.png'%}";
+    const trees = "{%static 'OregonFiles/assets/Trees.PNG'%}";
+    const forest_background = "{%static 'OregonFiles/assets/ForestBackground.png'%}";
+    const forest_foreground = "{%static 'OregonFiles/assets/ForestForeground.PNG'%}";
+
+</script>
+<script src="{%static 'OregonFiles/scripts/homebckg.js'%}"></script>
+</div>
+{%endblock%}
+<!-- can also do a continue maybe if time, this would basically see if any games are unfinished and then pull up the data to populate the fields -->
