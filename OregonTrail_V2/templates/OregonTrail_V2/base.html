@@ -29,12 +29,17 @@
                 }
 
             }
+            .nav-links a{
+                /* font-size: 14px; */
+                border:solid;
+                border-radius: 5px;
+            }
         </style>
     </head>
     <body>
         <nav class="joes-nav">
             <div class = "cont">
-            <ul class="nav-links">
+            <ul class="nav-links" >
                 <li><a href="{%url 'base'%}">Home</a></li>
                 <!-- want to add link back to profile but not sure how pk is being passed through here -->
                 {%if profile.pk%}
@@ -47,6 +52,9 @@
                 <li><a href="{%url 'login-O' %}">User Page</a></li>
                 {%endif%}
                 <li><a href="{%url 'leaderboard' %}">LeaderBoard</a></li>
+                <li><a href="{%url 'show_all' %}">Mini Facebook</a></li>
+                <!-- <li><a href="{%url 'base_view' %}">Fighting Game</a></li> -->
+                <li><a href="{%url 'voters'%}">Voter Analytics</a></li>
                 {%if request.user.is_authenticated%} 
         
                 <form action="{%url 'logout-O' %}" method="POST">

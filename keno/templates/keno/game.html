@@ -7,4 +7,10 @@
 <p>button selected: {{i}}</p>
 {%endfor%}
 <p>money per game: {{money_per_game}}</p>
+{%for i in 20_chosen%}
+<p>{{i}}</p>
+{%endfor%}
+<p>and the number of matches was: {{counter}}</p>
+
+<button onclick="window.location.reload();">Re-Roll!</button>
 {%endblock%}
