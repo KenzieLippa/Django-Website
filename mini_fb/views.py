@@ -25,11 +25,23 @@ class ShowAllView(ListView):
         return super().dispatch(req)
 # Create your views here.
 
-class ShowProfile(DetailView):
+class ShowProfile(LoginRequiredMixin, DetailView):
     '''show the profile that was clicked on'''
     model = Profile
     template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
+
+    def get_login_url(self):
+        return reverse('login')
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+
+        #set the profile pk in the session
+        self.request.session['profile_pk'] = self.object.pk
+
+        return context
+    
 
 class Create_Profile_View(CreateView):
     # adding the login mixin to both this and the other
