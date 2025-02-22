@@ -33,6 +33,13 @@ def base(req):
         boo =req.session['profile_pk'] = profile.pk
     return render(req, template_name, {'profile': profile, 'profile_pk':boo})
 
+
+def about(req):
+    '''show the main page'''
+    template_name = "OregonTrail_V2/aboutme.html"
+    
+    return render(req, template_name)
+
 class Create_Full_Profile_View(CreateView):
     # adding the login mixin to both this and the other
     '''a view to create a new profile and save to the database'''

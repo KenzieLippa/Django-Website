@@ -29,6 +29,16 @@
         align-items: center;
         gap: 20px;
     }
+    .button-container2{
+        position: absolute;
+        bottom: 5%;
+        left: 48%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
     </style>
 <div style = "position: relative; text-align: center;">
     <canvas style="display:block;"></canvas>
@@ -38,14 +48,18 @@
 </div>
 
 <div class = "button-container" >
-<h3 class = "fun-times" style="width: 300px;"><a href="{%url 'create_game' %}">New_Game</a></h3>
+<button class = "fun-times" style="width: 300px;" onclick="window.location.href='{%url 'create_game' %}'">New_Game</button>
 {%if profile.pk%}
-<h3 class="fun-times" ><a href="{%url 'profile-O' profile.pk%}">Continue</a></h3>
+<button class="fun-times" onclick="window.location.href='{%url 'profile-O' profile.pk%}'">Continue</button>
 {%elif game.profile.pk%}
-<h3 class="fun-times"><a href="{%url 'profile-O' game.profile.pk%}">Continue</a></h3>
+<button class="fun-times" onclick="window.location.href='{%url 'profile-O' game.profile.pk%}'">Continue</button>
 {%else%}
-<h3 class="fun-times" ><a href="{%url 'login-O' %}">Log in to Continue</a></h3>
+<button class="fun-times" onclick="window.location.href='{%url 'login-O' %}'">Log in to Continue</button>
 {%endif%}
+</div>
+<div class="button-container2">
+
+    <button class="fun-times" onclick="window.location.href='{%url 'about'%}'">About McKenzie</button>
 </div>
 <!-- </div> -->
 <script>
